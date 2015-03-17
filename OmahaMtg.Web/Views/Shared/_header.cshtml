@@ -1,0 +1,32 @@
+﻿<nav class="navigation-bar fixed-top">
+    <div class="navigation-bar-content container">
+        <a href="/" class="element"><span class="icon-grid-view"></span> OmahaMTG</a>
+        <span class="element-divider" style="opacity: 1"></span>
+        <a href="/Account/Login" class="element ">Contribute</a>
+        <a href="/Account/Login" class="element">Sponsors</a>
+        <a href="/Account/Login" class="element">About</a>
+        
+
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <a href="/Account/Login" class="element place-right">Login</a>
+            <a href="/Account/Register" class="element place-right">Register</a>
+
+        }
+        else
+        {
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+            {
+                @Html.AntiForgeryToken()
+                <a href="/Profile" class="element place-right">Profile</a>
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="element place-right">Log off</a>
+                if (User.IsInRole("Admin"))
+                {
+                    <a href="/Admin/AdminHome" class="element place-right">Admin</a>
+                }
+            }
+        }
+        <div></div>
+
+    </div>
+</nav>

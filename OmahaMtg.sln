@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmahaMtg.Web", "OmahaMtg.Web\OmahaMtg.Web.csproj", "{E0603027-B2D2-428E-84EC-6B9592B3EEB8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{ACF10A69-32FE-477C-94C2-07F864980FB8}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmahaMtg", "OmahaMtg\OmahaMtg.csproj", "{62B460FD-E9D9-4650-99AC-8ABB75FED0BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmahaMtgImport", "OmahaMtgImport\OmahaMtgImport.csproj", "{CE1427B3-E940-4E88-9D5E-02F97B6F928A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{F0034807-5AA8-484F-A2F9-1331544B9B85}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.txt = Readme.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://omahamtg.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = OmahaMtg.Web\\OmahaMtg.Web.csproj
+		SccProjectName1 = OmahaMtg.Web
+		SccLocalPath1 = OmahaMtg.Web
+		SccProjectUniqueName2 = OmahaMtg\\OmahaMtg.csproj
+		SccProjectName2 = OmahaMtg
+		SccLocalPath2 = OmahaMtg
+		SccProjectUniqueName3 = OmahaMtgImport\\OmahaMtgImport.csproj
+		SccProjectName3 = OmahaMtgImport
+		SccLocalPath3 = OmahaMtgImport
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0603027-B2D2-428E-84EC-6B9592B3EEB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0603027-B2D2-428E-84EC-6B9592B3EEB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0603027-B2D2-428E-84EC-6B9592B3EEB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0603027-B2D2-428E-84EC-6B9592B3EEB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62B460FD-E9D9-4650-99AC-8ABB75FED0BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62B460FD-E9D9-4650-99AC-8ABB75FED0BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62B460FD-E9D9-4650-99AC-8ABB75FED0BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62B460FD-E9D9-4650-99AC-8ABB75FED0BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE1427B3-E940-4E88-9D5E-02F97B6F928A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE1427B3-E940-4E88-9D5E-02F97B6F928A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE1427B3-E940-4E88-9D5E-02F97B6F928A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE1427B3-E940-4E88-9D5E-02F97B6F928A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

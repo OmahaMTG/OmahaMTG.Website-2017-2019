@@ -1,0 +1,131 @@
+﻿@using System.Activities.Statements
+@model OmahaMtg.PagedSet<OmahaMtg.Posts.PostInfo>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Event Admin</h2>
+@Html.ActionLink("New Event", "New", "Event",  new{Area = "Admin"}, new{ @class = "button small info"})
+<br/><br/>
+
+<table class="table">
+    <thead>
+    <tr>
+        <td style="width: 115px;"></td>
+        <td>
+            Subject
+        </td>
+        <td>
+            Is Deleted
+        </td>
+        <td style="width: 125px;">
+            Publish Start
+        </td>
+        <td style="width: 125px;">
+            Publish End
+        </td>
+        <td style="width: 125px;">
+            Event Time
+        </td>
+        <td>
+            Group
+        </td>
+    </tr>
+    </thead>
+
+    @foreach (var item in Model.Records)
+    {
+        <tr>
+            <td style="text-align: center">
+                <div>
+                    @Html.ActionLink("Edit", "Details", "Event", new { Area = "Admin", Id = item.Id }, new { @class = "button small info" })
+
+                    <a class="button small info" href="Email/@item.Id">Email</a>
+                </div>
+                <div style="margin-top:5px">
+                    @Html.ActionLink("Winner Picker", "Details", "Event", new { Area = "Admin", Id = item.Id }, new { @class = "button small info" })                    
+                </div>
+
+            </td>
+            <td>
+                @item.Title
+            </td>
+            <td>
+                @item.IsDeleted
+            </td>
+            <td>
+                @item.PublishStartTime
+            </td>
+            <td>
+                @item.PublishEndTime
+            </td>
+            <td>
+                @{
+                    var info = item as OmahaMtg.Posts.EventInfo;
+                    if (info != null)
+                    {
+                        <text>@info.EventStartTime</text>
+                    }
+                }
+            </td>
+            <td>
+                <div class="pull-right">
+                    @foreach (var group in item.AvailableGroups)
+                    {
+                        if (item.GroupTags.Contains(group.Key))
+                        {
+                            <span class="label badge ">@group.Value</span>
+                        }
+                    }
+
+                </div>
+            </td>
+        </tr>
+
+    }
+</table>
+
+
+<div class="pagination">
+    <ul>
+        @if (Model.Page > 1)
+        {
+            <li class="first"><a href="?page=1"><i class="icon-first-2"></i></a></li>
+            <li class="prev"><a href="?page=@(Model.Page - 1) "><i class="icon-previous"></i></a></li>
+        }
+
+        @for (int x = @Model.Page - 1; x <= @Model.Page; x++)
+        {
+            if (!(Model.Page > Model.TotalPages) && x >= 1 && x < Model.Page)
+            {
+                <li><a href="?page=@x">@x</a></li>
+            }
+        }
+
+        <li class="disabled"><a>@Model.Page</a></li>
+
+        @for (int x = @Model.Page + 1; x <= @Model.Page + 2; x++)
+        {
+            if (!(Model.Page > Model.TotalPages) && x > 0 && x <= Model.TotalPages)
+            {
+                <li><a href="?page=@x">@x</a></li>
+            }
+        }
+
+        @if (Model.TotalPages > Model.Page + 2)
+        {
+            <li class="spaces"><a>...</a></li>
+            <li><a href="?page=@Model.TotalPages">@Model.TotalPages</a></li>
+        }
+
+        @if (Model.Page < Model.TotalPages)
+        {
+            <li class="next"><a href="?page=@(Model.Page + 1) "><i class="icon-next"></i></a></li>
+            <li class="last"><a href="?page=@(Model.TotalPages) "><i class="icon-last-2"></i></a></li>
+        }
+
+    </ul>
+</div>

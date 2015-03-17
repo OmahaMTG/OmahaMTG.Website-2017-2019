@@ -1,0 +1,196 @@
+﻿@model OmahaMtg.Posts.EventInfo
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/anytimecss")
+@section Scripts{
+
+    @Scripts.Render("~/bundles/marked")
+    @Scripts.Render("~/bundles/anytimejs")
+    <script>
+
+        document.getElementById("bodyOutput").innerHTML = marked($("#bodyEdit").val());
+        document.getElementById("locationOutput").innerHTML = marked($("#locationEdit").val());
+        document.getElementById("sponsorOutput").innerHTML = marked($("#sponsorEdit").val());
+
+
+        $("#bodyEdit").bind("input propertychange", function () {
+            document.getElementById("bodyOutput").innerHTML =
+                marked(this.value);
+        });
+
+
+        $("#sponsorEdit").bind("input propertychange", function () {
+            document.getElementById("sponsorOutput").innerHTML =
+                marked(this.value);
+        });
+
+        $("#locationEdit").bind("input propertychange", function () {
+            document.getElementById("locationOutput").innerHTML =
+                marked(this.value);
+        });
+
+        $("#eventStartTime").AnyTime_picker({ format: "%m/%d/%Y %l:%i:%s %p" });
+        $("#eventEndTime").AnyTime_picker({ format: "%m/%d/%Y %l:%i:%s %p" });
+        $("#publishEndTime").AnyTime_picker({ format: "%m/%d/%Y %l:%i:%s %p" });
+        $("#publishStartTime").AnyTime_picker({ format: "%m/%d/%Y %l:%i:%s %p" });
+
+        $("button[data-clear]").bind("click", function () {
+            var id = $(this).data("clear");
+            $("#" + id).val('');
+        });
+    </script>
+}
+<form method="POST">
+<fieldset>
+    <div>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Title</label>
+                <div class="input-control text" data-role="input-control">
+                    <input type="text" value="@Model.Title" id="title" name="title" tabindex="1" style="max-width: none;">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="height: 100%">
+                <label>Body</label>
+                <div class="input-control text " data-role="input-control" style="bottom: 5px; height: 100%">
+                    <textarea id="bodyEdit" name="Body" style="max-width: none; width: 100%; height: 400px" tabindex="2" rows="50">@Model.Body</textarea>
+                    <br/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Preview</label>
+                <div id="bodyOutput">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="height: 100%">
+                <label>Location</label>
+                <div class="input-control text " data-role="input-control" style="bottom: 5px; height: 100%">
+                    <textarea id="locationEdit" name="Location" style="max-width: none; width: 100%; height: 400px" tabindex="2" rows="50">@Model.Location</textarea>
+                    <br/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Preview</label>
+                <div id="locationOutput">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="height: 100%">
+                <label>Sponsor</label>
+                <div class="input-control text " data-role="input-control" style="bottom: 5px; height: 100%">
+                    <textarea id="sponsorEdit" name="Sponsor" style="max-width: none; width: 100%; height: 400px" tabindex="2" rows="50">@Model.Sponsor</textarea>
+                    <br />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Preview</label>
+                <div id="sponsorOutput">
+                   
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Event Start Time<button class="button mini info" style="float: right" data-clear="eventStartTime" type='button'>Clear</button></label>
+                <div class="input-control text" data-role="input-control">
+                    <input type="text" value="@Model.EventStartTime" id="eventStartTime" name="eventStartTime" tabindex="1" style="max-width: none;">
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Event End Time<button class="button mini info" style="float: right" data-clear="eventEndTime" type='button'>Clear</button></label>
+                <div class="input-control text" data-role="input-control">
+                    <input type="text" value="@Model.EventEndTime" i id="eventEndTime" name="eventEndTime" tabindex="1" style="max-width: none;">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>Publish Start Time<button class="button mini info" style="float: right" data-clear="publishStartTime" type='button'>Clear</button></label>
+                <div class="input-control text" data-role="input-control">
+                    <input type="text" value="@Model.PublishStartTime" id="publishStartTime" name="publishStartTime" tabindex="1" style="max-width: none;">
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Publish End Time<button class="button mini info" style="float: right" data-clear="publishEndTime" type='button'>Clear</button></label>
+                <div class="input-control text" data-role="input-control">
+                    <input type="text" value="@Model.PublishEndTime" id="publishEndTime" name="publishEndTime" tabindex="1" style="max-width: none;">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Vimeo Id</label>
+                <div class="input-control text" data-role="input-control">
+                    <input type="text" value="@Model.VimeoId" id="vimeoId" name="vimeoId" tabindex="1" style="max-width: none;">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <ul>
+                    @foreach (var item in Model.AvailableGroups)
+                    {
+                        <div class="" data-role="input-control">
+                            <label>
+                                @if (Model.GroupTags.Contains(item.Key))
+                                {
+
+                                    <input type="checkbox" checked="" name="groupTags" value="@item.Key">
+                                    @item.Value
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="groupTags" value="@item.Key">
+                                    @item.Value
+                                }
+                            </label>
+                        </div>
+                    }
+
+                </ul>
+            </div>
+            <div class="col-md-6">
+                
+                        <div class="" data-role="input-control">
+                            <label>
+                                @if (Model.IsDeleted)
+                                {
+                                    <input type="checkbox" name="isDeleted" checked="" value="true">
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="isDeleted" value="true">
+                                }
+                                Deleted
+                            </label>
+                        </div>
+
+            </div>
+        </div>
+
+        <br/><br/>
+        <div class="row">
+            <div class="col-md-6"> </div>
+            <div class="col-md-6" style="text-align: right">
+                <button class="button primary" type="submit">Save</button> &nbsp; &nbsp;
+            </div>
+        </div>
+
+    </div>
+</fieldset>
+</form>

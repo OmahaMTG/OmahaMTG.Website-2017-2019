@@ -1,0 +1,147 @@
+﻿@model OmahaMtg.Web.Areas.Admin.Models.Email.Email
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "emailForm" }))
+{
+
+    <h2>Email Group Members</h2>
+    <fieldset>
+        <div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>From Email</label>
+                            <div class="input-control text" data-role="input-control">
+                                <input type="text" value="@Model.FromEmail" id="fromEmail" name="fromEmail" tabindex="1" style="max-width: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Subject</label>
+                            <div class="input-control text" data-role="input-control">
+                                <input type="text" value="@Model.Subject" id="subject" name="subject" tabindex="1" style="max-width: none;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul>
+                                @foreach (var item in Model.AvailableGroups)
+                                {
+                                    <div class="" data-role="input-control">
+                                        <label>
+                                            @if (Model.RecipientGroups.Contains(item.Key))
+                                            {
+
+                                                <input type="checkbox" checked="" name="recipientGroups" value="@item.Key">
+                                                @item.Value
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" name="recipientGroups" value="@item.Key">
+                                                @item.Value
+                                            }
+                                        </label>
+                                    </div>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            <div class="row">
+                <div class="col-md-12" style="height: 100%">
+                    <label>Body</label>
+                    <div class="input-control text " data-role="input-control" style="bottom: 5px; height: 100%">
+                        <textarea id="body" name="body" style="max-width: none; width: 100%; height: 400px" tabindex="2" rows="50">@Model.Body</textarea>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="" data-role="input-control">
+                        <label class="pull-right">
+                            <input type="checkbox" name="sendAsTest" id="sendAsTest" title="Send As Test" />
+                            Send as Test (only sends to you)
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <span>
+                        Sent 100 messages
+                    </span>
+                    <input type="submit" value="Send Emails" class="button info pull-right"/>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </fieldset>
+
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#emailForm").submit(function() {
+                event.preventDefault();
+                var url = "/Admin/Email/SendEmail";
+
+                var emailData = {
+                    subject: $("#subject").val(),
+                    body: $("#body").val(),
+                    fromEmail: $("#fromEmail").val(),
+                    sendAsTest: $("#sendAsTest").val(),
+                    recipientGroups: $("#recipientGroups").map(function () {
+                        return this.value;
+                    }).get()
+                };
+
+                console.log($(emailData));
+                    $.ajax({
+                        url: url,
+                        async: true,
+                        dataType: "json",
+                        type: "POST",
+                        data: JSON.stringify(emailData),
+                        contentType: 'application/json; charset=utf-8',
+                        success: function(data) {
+                            console.log(data);
+
+                            $("#profileUpdateMessage").fadeIn("fast", function() {
+                                $(this).delay(1000).fadeOut("slow");
+                            });
+                        },
+                        error: function (data) {
+                            console.log(data);
+                            alert("error " + data);
+                        }
+                    });
+
+                }
+            );
+
+
+        });
+
+    </script>
+}
+
+
+
