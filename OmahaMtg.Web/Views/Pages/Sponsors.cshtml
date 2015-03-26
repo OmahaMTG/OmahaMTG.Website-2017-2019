@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Sponsors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sponsors</h2>
+
+<p>Our Sponsors are the reason we can bring you great content each month with no cost to our members. Sponsors provide food
+    and door prizes. </p>
+
+<p>Each group is ran seperately from the others. If you are interested in sponsoring one of the groups please reach out to the leaders of that group
+    for details on how your organization can sponsor an event.</p>
+<br/><br/>
+<div class="tab-control" data-role="tab-control">
+    <ul class="tabs">
+        <li class="active"><a href="#_dotnet">.NET Group Sponsors</a></li>
+        <li><a href="#_sharepoint">Sharepoint Group Sponsors</a></li>
+        <li><a href="#_sqlbi">SQL/BI Group Sponsors</a></li>
+    </ul>
+
+    <div class="frames">
+        <div class="frame" id="_dotnet">List .Net sponsors</div>
+        <div class="frame" id="_sharepoint">List Sharepoint Sponsors</div>
+        <div class="frame" id="_sqlbi">List SQL Sponsors</div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $('.tab-control').tabcontrol();
+    </script>
+}

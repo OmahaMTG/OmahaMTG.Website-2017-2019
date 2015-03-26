@@ -10,3 +10,5 @@
 /// <reference path="site.js" />
 /// <reference path="marked.min.js" />
 /// <reference path="anytime.5.0.5.min.js" />
+/// <reference path="metro-tab-control.js" />
+/// <reference path="jquery.widget.min.js" />

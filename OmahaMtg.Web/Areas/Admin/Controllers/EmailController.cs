@@ -78,11 +78,14 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
             var mail =
                 new System.Net.Mail.MailMessage(smtpFrom, smtpFrom);
 
-            foreach (var group in model.RecipientGroups)
+            if (!model.SendAsTest)
             {
-                foreach (var email in _gm.GetUserEmailsInGroup(group))
+                foreach (var group in model.RecipientGroups)
                 {
-                    mail.Bcc.Add(email);
+                    foreach (var email in _gm.GetUserEmailsInGroup(group))
+                    {
+                        mail.Bcc.Add(email);
+                    }
                 }
             }
 
@@ -90,7 +93,7 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
             mail.Body = model.Body;
 
             // Send:
-            //client.Send(mail);
+            client.Send(mail);
 
             return Json(mail.Bcc.Count);
         }

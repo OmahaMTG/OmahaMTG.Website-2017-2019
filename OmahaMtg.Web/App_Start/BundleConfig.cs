@@ -10,6 +10,8 @@ namespace OmahaMtg.Web
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.widget.min.js",
+                         "~/Scripts/metro-tab-control.js",
                         "~/Scripts/site.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -22,6 +24,7 @@ namespace OmahaMtg.Web
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/marked").Include(

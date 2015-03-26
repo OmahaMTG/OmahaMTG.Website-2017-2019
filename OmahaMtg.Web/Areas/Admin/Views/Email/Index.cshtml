@@ -36,6 +36,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <ul>
+                               
                                 @foreach (var item in Model.AvailableGroups)
                                 {
                                     <div class="" data-role="input-control">
@@ -74,7 +75,7 @@
                 <div class="col-md-4">
                     <div class="" data-role="input-control">
                         <label class="pull-right">
-                            <input type="checkbox" name="sendAsTest" id="sendAsTest" title="Send As Test" />
+                            @Html.CheckBoxFor(m => m.SendAsTest)
                             Send as Test (only sends to you)
                         </label>
                     </div>
@@ -114,7 +115,7 @@
                     subject: $("#subject").val(),
                     body: $("#body").val(),
                     fromEmail: $("#fromEmail").val(),
-                    sendAsTest: $("#sendAsTest").val(),
+                    sendAsTest: $("#SendAsTest").val(),
                     recipientGroups: recipientGroups
                 };
 
