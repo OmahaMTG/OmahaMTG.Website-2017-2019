@@ -43,12 +43,12 @@
                                             @if (Model.RecipientGroups.Contains(item.Key))
                                             {
 
-                                                <input type="checkbox" checked="" name="recipientGroups" value="@item.Key">
+                                                <input type="checkbox" checked="" name="recipientGroups" id="recipientGroups" value="@item.Key">
                                                 @item.Value
                                             }
                                             else
                                             {
-                                                <input type="checkbox" name="recipientGroups" value="@item.Key">
+                                                <input type="checkbox" name="recipientGroups" id="recipientGroups" value="@item.Key">
                                                 @item.Value
                                             }
                                         </label>
@@ -103,14 +103,19 @@
                 event.preventDefault();
                 var url = "/Admin/Email/SendEmail";
 
+                var recipientGroups = [];
+
+                $('#recipientGroups:checked').each(function () {
+                    alert($(this).val());
+                    recipientGroups.push($(this).val());
+                });
+
                 var emailData = {
                     subject: $("#subject").val(),
                     body: $("#body").val(),
                     fromEmail: $("#fromEmail").val(),
                     sendAsTest: $("#sendAsTest").val(),
-                    recipientGroups: $("#recipientGroups").map(function () {
-                        return this.value;
-                    }).get()
+                    recipientGroups: recipientGroups
                 };
 
                 console.log($(emailData));
@@ -122,15 +127,15 @@
                         data: JSON.stringify(emailData),
                         contentType: 'application/json; charset=utf-8',
                         success: function(data) {
-                            console.log(data);
+                 
 
                             $("#profileUpdateMessage").fadeIn("fast", function() {
                                 $(this).delay(1000).fadeOut("slow");
                             });
                         },
                         error: function (data) {
-                            console.log(data);
-                            alert("error " + data);
+                            //console.log(data);
+                           // alert("error " + data);
                         }
                     });
 

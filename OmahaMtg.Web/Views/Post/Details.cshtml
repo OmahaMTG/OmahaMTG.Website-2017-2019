@@ -62,21 +62,7 @@
 @if ((Model is EventInfo))
 {
 
-    if ((Model as EventInfo).HtmlLocation.Length > 0)
-    {
-        <p>
-            <h3>Location</h3>
-            @Html.Raw((Model as EventInfo).HtmlLocation)
-        </p>
-    }
-
-    if ((Model as EventInfo).HtmlSponsor.Length > 0)
-    {
-        <p>
-            <h3>Sponsor</h3>
-            @Html.Raw((Model as EventInfo).HtmlSponsor)
-        </p>
-    }
+  
 
 }
 

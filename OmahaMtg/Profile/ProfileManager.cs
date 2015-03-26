@@ -62,8 +62,6 @@ namespace OmahaMtg.Profile
         }
 
 
-
-
         public void UpdateEmail(Guid userId, string email)
         {
             throw new NotImplementedException();

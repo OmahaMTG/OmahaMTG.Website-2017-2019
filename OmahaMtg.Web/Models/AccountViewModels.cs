@@ -50,7 +50,6 @@ namespace OmahaMtg.Web.Models
     {
         [Required]
         [Display(Name = "Email")]
-        [EmailAddress]
         public string Email { get; set; }
 
         [Required]

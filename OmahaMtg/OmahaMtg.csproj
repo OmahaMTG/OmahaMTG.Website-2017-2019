@@ -93,6 +93,8 @@
     <Compile Include="Data\RsvpConfiguration.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="EmailService.cs" />
+    <Compile Include="Groups\GroupManager.cs" />
+    <Compile Include="Groups\IGroupManager.cs" />
     <Compile Include="Migrations\201412150028230_InitialCreate.cs" />
     <Compile Include="Migrations\201412150028230_InitialCreate.Designer.cs">
       <DependentUpon>201412150028230_InitialCreate.cs</DependentUpon>

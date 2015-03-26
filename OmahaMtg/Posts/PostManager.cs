@@ -50,9 +50,7 @@ namespace OmahaMtg.Posts
                         CreatedByUserName = GetUserName(s.CreatedByUser),
                         EventEndTime = (s as Event).EventEndTime,
                         EventStartTime = (s as Event).EventStartTime,
-                        Location = (s as Event).Location,
                         Id = s.Id,
-                        Sponsor = (s as Event).Sponsor,
                         Title = s.Title,
                         GroupTags = s.Groups.Select(g=> g.Id), 
                         PublishEndTime =  s.PublishEndTime,
@@ -122,14 +120,10 @@ namespace OmahaMtg.Posts
                     CreatedByUserId = post.CreatedByUserId,
                     EventEndTime = (post as Event).EventEndTime,
                     EventStartTime = (post as Event).EventStartTime,
-                    Location = (post as Event).Location,
                     Id = post.Id,
-                    Sponsor = (post as Event).Sponsor,
                     Title = post.Title,
                     AvailableGroups = AvailableGroups,
                     GroupTags = post.Groups.Select(g => g.Id),
-                    HtmlLocation = md.Transform((post as Event).Location),
-                    HtmlSponsor = md.Transform((post as Event).Sponsor),
                     CreatedByUserName = GetUserName(post.CreatedByUser),
                     VimeoId = (post as Event).VimeoId
                 };
@@ -215,9 +209,7 @@ namespace OmahaMtg.Posts
                 CreatedByUserId = s.CreatedByUserId,
                 EventEndTime = (s as Event).EventEndTime,
                 EventStartTime = (s as Event).EventStartTime,
-                Location = (s as Event).Location,
                 Id = s.Id,
-                Sponsor = (s as Event).Sponsor,
                 Title = s.Title,
                 AvailableGroups = AvailableGroups
             });
@@ -250,8 +242,6 @@ namespace OmahaMtg.Posts
             eventToUpdate.PublishStartTime = updateEvent.PublishStartTime;
             eventToUpdate.Title = updateEvent.Title;
             eventToUpdate.Body = updateEvent.Body;
-            eventToUpdate.Location = updateEvent.Location;
-            eventToUpdate.Sponsor = updateEvent.Sponsor;
             eventToUpdate.VimeoId = updateEvent.VimeoId;
 
             _context.SaveChanges();
@@ -269,8 +259,6 @@ namespace OmahaMtg.Posts
             newDbEvent.PublishStartTime = newEvent.PublishStartTime;
             newDbEvent.Title = newEvent.Title;
             newDbEvent.Body = newEvent.Body;
-            newDbEvent.Location = newEvent.Location;
-            newDbEvent.Sponsor = newEvent.Sponsor;
             newDbEvent.CreatedByUserId = newEvent.CreatedByUserId;
             newDbEvent.VimeoId = newEvent.VimeoId;
             _context.Events.Add(newDbEvent);
