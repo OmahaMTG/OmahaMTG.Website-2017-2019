@@ -9,6 +9,6 @@ namespace OmahaMtg.Email
 {
     public interface IEmailer
     {
-        void SendEmail(EmailInfo emailInfo);
+        Task SendEmailAsync(EmailInfo emailInfo);
     }
 }
