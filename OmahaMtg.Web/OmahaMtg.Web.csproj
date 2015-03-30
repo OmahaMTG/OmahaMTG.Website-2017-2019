@@ -238,6 +238,7 @@
     <Content Include="Areas\Admin\Views\Event\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Event\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Email\Index.cshtml" />
+    <Content Include="google9c8cef23cdb5bb3b.html" />
     <Content Include="newrelic\Extensions\CoreInstrumentation.xml" />
     <Content Include="newrelic\Extensions\NewRelic.Collections.dll" />
     <Content Include="newrelic\Extensions\NewRelic.Core.dll" />
