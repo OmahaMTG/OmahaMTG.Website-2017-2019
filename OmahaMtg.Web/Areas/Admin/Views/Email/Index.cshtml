@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <span>
+                    <span id="sendResult" style="display: none; color: red">
                         Sent 100 messages
                     </span>
                     <input type="submit" value="Send Emails" class="button info pull-right"/>
@@ -99,27 +99,58 @@
 @section scripts
 {
     <script>
+        function isEmpty(str) {
+            return (!str || 0 === str.length);
+        }
+
+        function displayMessge(message) {
+            $("#sendResult").html(message);
+
+            $("#sendResult").fadeIn("fast", function () {
+                $(this).delay(5000).fadeOut("slow");
+            });
+        }
+
         $(document).ready(function() {
             $("#emailForm").submit(function() {
-                event.preventDefault();
-                var url = "/Admin/Email/SendEmail";
+                    event.preventDefault();
+                    var url = "/Admin/Email/SendEmail";
 
-                var recipientGroups = [];
+                    var recipientGroups = [];
 
-                $('#recipientGroups:checked').each(function () {
-                    alert($(this).val());
-                    recipientGroups.push($(this).val());
-                });
+                    $('#recipientGroups:checked').each(function () {
+                        recipientGroups.push($(this).val());
+                    });
 
-                var emailData = {
-                    subject: $("#subject").val(),
-                    body: $("#body").val(),
-                    fromEmail: $("#fromEmail").val(),
-                    sendAsTest: $("#SendAsTest").val(),
-                    recipientGroups: recipientGroups
-                };
+                    var emailData = {
+                        subject: $("#subject").val(),
+                        body: $("#body").val(),
+                        fromEmail: $("#fromEmail").val(),
+                        sendAsTest: $("#SendAsTest").val(),
+                        recipientGroups: recipientGroups
+                    };
 
-                console.log($(emailData));
+                    if (isEmpty(emailData.subject)) {
+                        displayMessge("Missing Subject");
+                        return;
+                    }
+
+                    if (isEmpty(emailData.fromEmail)) {
+                        displayMessge("Missing From Email");
+                        return;
+                    }
+
+                    if (isEmpty(emailData.fromEmail)) {
+                        displayMessge("Message Body is empty");
+                        return;
+                    }
+
+                    if (isEmpty(emailData.recipientGroups)) {
+                        displayMessge("Please Select a group to Email");
+                        return;
+                    }
+
+
                     $.ajax({
                         url: url,
                         async: true,
@@ -127,16 +158,17 @@
                         type: "POST",
                         data: JSON.stringify(emailData),
                         contentType: 'application/json; charset=utf-8',
-                        success: function(data) {
-                 
-
-                            $("#profileUpdateMessage").fadeIn("fast", function() {
-                                $(this).delay(1000).fadeOut("slow");
-                            });
+                        success: function (data) {
+                            console.log(data);
+                            displayMessge("Sent " + data + "Emails");
                         },
                         error: function (data) {
-                            //console.log(data);
-                           // alert("error " + data);
+                            displayMessge(data);
+                        },
+                        statusCode: {
+                            400: function () {
+                                displayMessge("Error Sending Emails");
+                            }
                         }
                     });
 

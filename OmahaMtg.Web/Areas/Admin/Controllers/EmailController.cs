@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net;
+using System.Runtime.ExceptionServices;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Microsoft.AspNet.Identity;
+using OmahaMtg.Email;
 using OmahaMtg.Groups;
 using OmahaMtg.Posts;
 using OmahaMtg.Profile;
+
 using ModelBinderAttribute = System.Web.Http.ModelBinding.ModelBinderAttribute;
 
 namespace OmahaMtg.Web.Areas.Admin.Controllers
@@ -23,6 +29,15 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
             _gm = new GroupManager();
             _profileManager = new ProfileManager();
         }
+
+        public string SiteEmail
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["siteEmail"];
+            }
+        }
+
 
 
         // GET: Admin/Email
@@ -45,38 +60,19 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult SendEmail(Models.Email.Email model)
+        public async Task<JsonResult> SendEmail(Models.Email.Email model)
         {
-
-            //OmahaMtg.Posts.IPostManager pm = new PostManager();
-            //return Json(pm.UpdateRsvp(new Guid(User.Identity.GetUserId()), model.EventId, model.UserIsGoing));
-            //throw new NotImplementedException();
-
             // Credentials:
+            IEmailer emailer = new Emailer();
 
-            var smtpUserName = System.Configuration.ConfigurationManager.AppSettings["smtpUserName"];
-            var smtpServer = System.Configuration.ConfigurationManager.AppSettings["smtpServer"];
-            var smtpPassword = System.Configuration.ConfigurationManager.AppSettings["smtpPassword"];
-            var smtpFrom = model.FromEmail;
-
-            // Configure the client:
-            var client =
-                new System.Net.Mail.SmtpClient(smtpServer, Convert.ToInt32(587));
-
-            client.Port = 587;
-            client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
-            client.UseDefaultCredentials = false;
-
-            // Creatte the credentials:
-            System.Net.NetworkCredential credentials =
-                new System.Net.NetworkCredential(smtpUserName, smtpPassword);
-
-            client.EnableSsl = true;
-            client.Credentials = credentials;
-
-            // Create the message:
-            var mail =
-                new System.Net.Mail.MailMessage(smtpFrom, smtpFrom);
+            var message = new EmailInfo()
+            {
+                From = model.FromEmail,
+                Subject = model.Subject,
+                TextBody = model.Body,
+               
+            };
+            message.To.Add(SiteEmail);
 
             if (!model.SendAsTest)
             {
@@ -84,18 +80,32 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
                 {
                     foreach (var email in _gm.GetUserEmailsInGroup(group))
                     {
-                        mail.Bcc.Add(email);
+                        message.Bcc.Add(email);
                     }
                 }
             }
+            else
+            {
+                message.Bcc.Add(model.FromEmail);
+            }
 
-            mail.Subject =model.Subject;
-            mail.Body = model.Body;
 
-            // Send:
-            client.Send(mail);
+            try
+            {
+                await emailer.SendEmailAsync(message);
+                return Json(message.Bcc.Count);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                Dictionary<string, object> error = new Dictionary<string, object>();
+                error.Add("ErrorCode", -1);
+                error.Add("ErrorMessage", ex.Message);
+                return Json(error);
+            }
 
-            return Json(mail.Bcc.Count);
+
+            
         }
 
        
