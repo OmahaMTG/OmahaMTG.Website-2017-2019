@@ -55,7 +55,7 @@ namespace OmahaMtgImport.Models
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
 
-        private readonly List<string> _admins = new List<string>() { "beolson" };
+        private readonly List<string> _admins = new List<string>() { "beolson", "kerdirks", "mruwe", "brammp", "dipetersen" };
 
         [PetaPoco.Ignore]
         public bool IsAdmin
@@ -86,13 +86,17 @@ namespace OmahaMtgImport.Models
         public static void AddUser(TargetUser user)
         {
             var db = new PetaPoco.Database("TargetConnection");
+            if (!user.IsAdmin)
+            {
+                user.Email = user.Id.ToString() + "@mailinator.com";
+            }
             db.Insert("AspNetUsers", "Id", false, user);
 
             foreach (var group in user.GroupNames.Where(w => !string.IsNullOrEmpty(w.GroupName)))
             {
                 var groupId = TargetGroup.Groups.Where(w => w.Value == group.GroupName).FirstOrDefault().Key;
 
-                db.Insert("UserGroups", "Id", false, new { UserId = user.Id, GroupId = groupId });
+                db.Insert("UserGroups", "Id", false, new {UserId = user.Id, GroupId = groupId});
             }
 
             if (user.IsAdmin)
@@ -101,6 +105,7 @@ namespace OmahaMtgImport.Models
                     new {UserId = user.Id, RoleId = TargetRoles.Roles.FirstOrDefault().Key});
 
             }
+            
         }
     }
 

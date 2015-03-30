@@ -22,6 +22,7 @@ namespace OmahaMtgImport
             Console.ReadLine();
         }
 
+
         public static void ImportEvents()
         {
             var sourceEvents = SourceEvent.GetEvents();
