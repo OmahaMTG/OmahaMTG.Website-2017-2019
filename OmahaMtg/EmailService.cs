@@ -25,7 +25,10 @@ namespace OmahaMtg
             };
 
             identityMessage.To.Add(message.Destination);
+
             return emailer.SendEmailAsync(identityMessage);
+
+          
         }
     }
 }

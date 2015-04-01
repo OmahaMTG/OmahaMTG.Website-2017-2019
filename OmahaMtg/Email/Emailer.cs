@@ -26,9 +26,20 @@ namespace OmahaMtg.Email
             }
         }
 
+        public string SiteEmail
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["siteEmail"];
+            }
+        }
+
         public Task SendEmailAsync(EmailInfo emailInfo)
         {
             var myMessage = new SendGridMessage();
+
+            if (emailInfo.From == null)
+                emailInfo.From = SiteEmail;
 
             // Add the message properties.
             myMessage.From = new MailAddress(emailInfo.From);

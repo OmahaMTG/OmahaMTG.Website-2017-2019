@@ -214,6 +214,10 @@ namespace OmahaMtg.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
+                
+                if(user == null)
+                    user = await UserManager.FindByEmailAsync(model.Email);
+
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
@@ -224,7 +228,16 @@ namespace OmahaMtg.Web.Controllers
                 // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                try
+                {
+                    await
+                        UserManager.SendEmailAsync(user.Id, "Reset Password",
+                            "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                }
+                catch (Exception ex)
+                {
+                    NewRelic.Api.Agent.NewRelic.NoticeError(ex);
+                }
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
