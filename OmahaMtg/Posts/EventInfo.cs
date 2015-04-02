@@ -14,6 +14,7 @@ namespace OmahaMtg.Posts
         public bool IsUserRsvpd { get; set; }
         public int TotalRsvpCount { get; set; }
         public long? VimeoId { get; set; }
+        
 
     }
 }
