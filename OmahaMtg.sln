@@ -18,25 +18,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmahaMtgImport", "OmahaMtgI
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{F0034807-5AA8-484F-A2F9-1331544B9B85}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
 		Readme.txt = Readme.txt
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://omahamtg.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = OmahaMtg.Web\\OmahaMtg.Web.csproj
-		SccProjectName1 = OmahaMtg.Web
-		SccLocalPath1 = OmahaMtg.Web
-		SccProjectUniqueName2 = OmahaMtg\\OmahaMtg.csproj
-		SccProjectName2 = OmahaMtg
-		SccLocalPath2 = OmahaMtg
-		SccProjectUniqueName3 = OmahaMtgImport\\OmahaMtgImport.csproj
-		SccProjectName3 = OmahaMtgImport
-		SccLocalPath3 = OmahaMtgImport
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
