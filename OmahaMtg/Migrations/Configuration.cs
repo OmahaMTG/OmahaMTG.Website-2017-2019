@@ -9,8 +9,7 @@ namespace OmahaMtg.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            ContextKey = "OmahaMtg.Data.ApplicationDbContext";
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(OmahaMtg.Data.ApplicationDbContext context)
@@ -27,8 +26,6 @@ namespace OmahaMtg.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-
-
         }
     }
 }

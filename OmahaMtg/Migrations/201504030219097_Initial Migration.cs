@@ -3,7 +3,7 @@ namespace OmahaMtg.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
@@ -64,6 +64,15 @@ namespace OmahaMtg.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
+                "dbo.Groups",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.AspNetUserLogins",
                 c => new
                     {
@@ -89,15 +98,6 @@ namespace OmahaMtg.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.Groups",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -114,24 +114,13 @@ namespace OmahaMtg.Migrations
                         UserId = c.Guid(nullable: false),
                         EventId = c.Int(nullable: false),
                         RsvpTime = c.DateTime(nullable: false),
+                        User_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.UserId, t.EventId })
                 .ForeignKey("dbo.Events", t => t.EventId)
-                .Index(t => t.EventId);
-            
-            CreateTable(
-                "dbo.Sponsors",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        SponsorshipStart = c.DateTime(),
-                        SponsorshipEnd = c.DateTime(),
-                        SponsorName = c.String(),
-                        SponsorBlurb = c.String(),
-                        SponsorImageIdA = c.Guid(nullable: false),
-                        SponsorImageIdB = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
+                .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
+                .Index(t => t.EventId)
+                .Index(t => t.User_Id);
             
             CreateTable(
                 "dbo.PostGroups",
@@ -144,6 +133,19 @@ namespace OmahaMtg.Migrations
                 .ForeignKey("dbo.Posts", t => t.PostId, cascadeDelete: true)
                 .ForeignKey("dbo.Groups", t => t.GroupId, cascadeDelete: true)
                 .Index(t => t.PostId)
+                .Index(t => t.GroupId);
+            
+            CreateTable(
+                "dbo.UserGroups",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        GroupId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.GroupId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Groups", t => t.GroupId, cascadeDelete: true)
+                .Index(t => t.UserId)
                 .Index(t => t.GroupId);
             
             CreateTable(
@@ -166,17 +168,23 @@ namespace OmahaMtg.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.Events", "Id", "dbo.Posts");
+            DropForeignKey("dbo.Rsvps", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Rsvps", "EventId", "dbo.Events");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.UserGroups", "GroupId", "dbo.Groups");
+            DropForeignKey("dbo.UserGroups", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.PostGroups", "GroupId", "dbo.Groups");
             DropForeignKey("dbo.PostGroups", "PostId", "dbo.Posts");
             DropForeignKey("dbo.Posts", "CreatedByUserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropIndex("dbo.Events", new[] { "Id" });
+            DropIndex("dbo.UserGroups", new[] { "GroupId" });
+            DropIndex("dbo.UserGroups", new[] { "UserId" });
             DropIndex("dbo.PostGroups", new[] { "GroupId" });
             DropIndex("dbo.PostGroups", new[] { "PostId" });
+            DropIndex("dbo.Rsvps", new[] { "User_Id" });
             DropIndex("dbo.Rsvps", new[] { "EventId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
@@ -186,13 +194,13 @@ namespace OmahaMtg.Migrations
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Posts", new[] { "CreatedByUserId" });
             DropTable("dbo.Events");
+            DropTable("dbo.UserGroups");
             DropTable("dbo.PostGroups");
-            DropTable("dbo.Sponsors");
             DropTable("dbo.Rsvps");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Groups");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.Groups");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.Posts");

@@ -111,13 +111,9 @@
     <Compile Include="Email\IEmailer.cs" />
     <Compile Include="Groups\GroupManager.cs" />
     <Compile Include="Groups\IGroupManager.cs" />
-    <Compile Include="Migrations\201412150028230_InitialCreate.cs" />
-    <Compile Include="Migrations\201412150028230_InitialCreate.Designer.cs">
-      <DependentUpon>201412150028230_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501221915035_AddUserGroups.cs" />
-    <Compile Include="Migrations\201501221915035_AddUserGroups.Designer.cs">
-      <DependentUpon>201501221915035_AddUserGroups.cs</DependentUpon>
+    <Compile Include="Migrations\201504030219097_Initial Migration.cs" />
+    <Compile Include="Migrations\201504030219097_Initial Migration.Designer.cs">
+      <DependentUpon>201504030219097_Initial Migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PagedSet.cs" />
@@ -143,11 +139,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201412150028230_InitialCreate.resx">
-      <DependentUpon>201412150028230_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501221915035_AddUserGroups.resx">
-      <DependentUpon>201501221915035_AddUserGroups.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504030219097_Initial Migration.resx">
+      <DependentUpon>201504030219097_Initial Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

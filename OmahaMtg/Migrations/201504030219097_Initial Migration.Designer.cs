@@ -7,13 +7,13 @@ namespace OmahaMtg.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class AddUserGroups : IMigrationMetadata
+    public sealed partial class InitialMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddUserGroups));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201501221915035_AddUserGroups"; }
+            get { return "201504030219097_Initial Migration"; }
         }
         
         string IMigrationMetadata.Source
