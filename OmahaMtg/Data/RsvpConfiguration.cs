@@ -14,6 +14,7 @@ namespace OmahaMtg.Data
         {
             
             HasKey(pc => new { pc.UserId, pc.EventId });
+
         }
     }
 }

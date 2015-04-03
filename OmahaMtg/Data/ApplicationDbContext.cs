@@ -8,10 +8,10 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace OmahaMtg.Data
 {
-    class ApplicationDbContext : IdentityDbContext<User>
+    class ApplicationDbContext : IdentityDbContext<User, Role, Guid, UserLogin, UserRole, UserClaim>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DefaultConnection")
         {
             
         }

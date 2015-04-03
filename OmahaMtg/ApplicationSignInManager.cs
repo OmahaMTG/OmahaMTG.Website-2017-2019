@@ -14,7 +14,7 @@ using OmahaMtg.Data;
 namespace OmahaMtg
 {
     // Configure the application sign-in manager which is used in this application.
-    public class ApplicationSignInManager : SignInManager<User, string>
+    public class ApplicationSignInManager : SignInManager<User, Guid>
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)

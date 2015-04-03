@@ -24,7 +24,7 @@ namespace OmahaMtg.Posts
 
 
 
-        public string CreatedByUserId { get; set; }
+        public Guid CreatedByUserId { get; set; }
         public string CreatedByUserName { get; set; }
 
      

@@ -24,7 +24,7 @@ namespace OmahaMtg.Data
         public DateTime CreatedTime { get; set; }
         public DateTime ModifiedTime { get; set; }
         public bool IsDeleted { get; set; }
-        public string CreatedByUserId { get; set; }
+        public Guid CreatedByUserId { get; set; }
 
         public virtual User CreatedByUser { get; set; }
 

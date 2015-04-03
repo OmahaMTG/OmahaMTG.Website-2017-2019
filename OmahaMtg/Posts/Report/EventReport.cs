@@ -23,7 +23,8 @@ namespace OmahaMtg.Posts.Report
         }
         public byte[] GetEventReport(int eventId)
         {
-            return GenerateReport(GetEventUsers(eventId));
+            var users = GetEventUsers(eventId);
+            return GenerateReport(users);
         }
 
         private List<RsvpReportRow> GetEventUsers(int eventId)

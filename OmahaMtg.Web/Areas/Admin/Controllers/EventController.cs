@@ -41,8 +41,8 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult New(EventInfo post)
         {
-            post.CreatedByUserId = User.Identity.GetUserId();
-
+            post.CreatedByUserId = Guid.Parse(User.Identity.GetUserId());
+         
             int newEventId = _pm.CreateEvent(post);
 
             return RedirectToAction("Details", "Event", new { id = newEventId });

@@ -18,6 +18,9 @@ namespace OmahaMtg.Data
             .Map(m => m.MapLeftKey("UserId")
                 .MapRightKey("GroupId"));
 
+            HasMany(e => e.Rsvps)
+                .WithRequired(e => e.User)
+                .HasForeignKey(k => k.UserId);
 
         }
     }

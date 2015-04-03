@@ -15,7 +15,7 @@ namespace OmahaMtg.Profile
         private ApplicationUserManager _userManager;
         public ProfileManager()
         {
-            _userManager = new ApplicationUserManager(new UserStore<User>(new ApplicationDbContext()));
+            _userManager = new ApplicationUserManager(new UserStore<User, Role, Guid, UserLogin, UserRole, UserClaim>(new ApplicationDbContext()));
         }
 
         public ProfileInfo GetUserProfile(Guid userId)
@@ -39,13 +39,13 @@ namespace OmahaMtg.Profile
 
         public Tuple<bool, string> UpdatePassword(Guid userId, string currentPassword, string newPassword)
         {
-            var changePasswordResult = _userManager.ChangePassword(userId.ToString(), currentPassword, newPassword);
+            var changePasswordResult = _userManager.ChangePassword(userId, currentPassword, newPassword);
             return new Tuple<bool, string>(changePasswordResult.Succeeded, string.Join(",", changePasswordResult.Errors));
         }
 
         private User GetUser(Guid userId)
         {
-            return _userManager.Users.FirstOrDefault(w => w.Id == userId.ToString());
+            return _userManager.Users.FirstOrDefault(w => w.Id == userId);
         }
 
         private ProfileInfo MapUserToProfileInfo(User user)
