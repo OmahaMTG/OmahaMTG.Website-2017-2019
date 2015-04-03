@@ -273,11 +273,5 @@ namespace OmahaMtg.Posts
         }
 
 
-
-        public byte[] GetRsvpUsers(int eventId)
-        {
-            _context.Rsvps.Where(w => w.EventId == eventId).Count();
-            throw new NotImplementedException();
-        }
     }
 }

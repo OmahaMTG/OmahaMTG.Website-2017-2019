@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using OmahaMtg.Posts;
+using OmahaMtg.Posts.Report;
 
 namespace OmahaMtg.Web.Areas.Admin.Controllers
 {
@@ -57,6 +58,15 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
 
 
             return RedirectToAction("Details", "Event", new { id = post.Id });
+        }
+
+        public FileResult Download(int eventId)
+        {
+            IEventReport report = new EventReport();
+
+            byte[] fileBytes = report.GetEventReport(eventId);
+            string fileName = "EventReport.xlsx";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
     }
 }

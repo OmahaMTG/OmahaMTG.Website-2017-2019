@@ -12,7 +12,7 @@ namespace OmahaMtg.Data
     {
         public RsvpConfiguration()
         {
-
+            
             HasKey(pc => new { pc.UserId, pc.EventId });
         }
     }

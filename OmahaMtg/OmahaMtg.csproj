@@ -125,6 +125,9 @@
     <Compile Include="Posts\IPostManager.cs" />
     <Compile Include="Posts\PostInfo.cs" />
     <Compile Include="Posts\PostManager.cs" />
+    <Compile Include="Posts\Report\EventReport.cs" />
+    <Compile Include="Posts\Report\IEventReport.cs" />
+    <Compile Include="Posts\Report\RsvpReportRow.cs" />
     <Compile Include="Profile\ProfileInfo.cs" />
     <Compile Include="Posts\RsvpInfo.cs" />
     <Compile Include="Profile\IProfileManager.cs" />

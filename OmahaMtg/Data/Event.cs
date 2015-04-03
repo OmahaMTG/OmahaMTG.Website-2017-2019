@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OmahaMtg.Data
 {
-    class Event : Post
+    public class Event : Post
     {
         public DateTime? EventStartTime { get; set; }
         public DateTime? EventEndTime { get; set; }

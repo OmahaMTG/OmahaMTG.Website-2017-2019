@@ -20,6 +20,6 @@ namespace OmahaMtg.Posts
         IEnumerable<EventInfo> GetLatestEventsWithVideos(int numberToGet);
         IEnumerable<EventInfo> GetUpcomingEvents(int numberToGet);
          Dictionary<int, string> GetAvailableGroups();
-        byte[] GetRsvpUsers(int eventId);
+
     }
 }

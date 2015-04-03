@@ -27,5 +27,6 @@ namespace OmahaMtg.Data
         public string GitHubUser { get; set; }
 
         public virtual IList<Group> Groups { get; set; }
+
     }
 }

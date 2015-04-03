@@ -17,7 +17,8 @@ namespace OmahaMtg.Data
             .WithMany(e => e.Users)
             .Map(m => m.MapLeftKey("UserId")
                 .MapRightKey("GroupId"));
-            
+
+
         }
     }
 }
