@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -19,6 +20,7 @@ namespace OmahaMtg.Data
             // Add custom user claims here
             return userIdentity;
         }
+
 
         public string FirstName { get; set; }
         public string LastName { get; set; }

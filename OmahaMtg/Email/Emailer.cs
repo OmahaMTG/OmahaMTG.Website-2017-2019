@@ -66,7 +66,20 @@ namespace OmahaMtg.Email
             var transportWeb = new Web(credentials);
 
             // Send the email.
-            return transportWeb.DeliverAsync(myMessage);
+            return CheckForExceptionAsync(transportWeb.DeliverAsync(myMessage));
+        }
+
+        private async Task CheckForExceptionAsync(Task source)
+        {
+            try
+            {
+                await source;
+            }
+            catch (Exception ex)
+            {
+               // HandleException(ex);
+                //default(T);
+            }
         }
     }
 }
