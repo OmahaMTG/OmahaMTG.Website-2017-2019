@@ -11,8 +11,7 @@
     <script>
 
         document.getElementById("bodyOutput").innerHTML = marked($("#bodyEdit").val());
-        document.getElementById("locationOutput").innerHTML = marked($("#locationEdit").val());
-        document.getElementById("sponsorOutput").innerHTML = marked($("#sponsorEdit").val());
+
 
 
         $("#bodyEdit").bind("input propertychange", function () {
@@ -20,16 +19,6 @@
                 marked(this.value);
         });
 
-
-        $("#sponsorEdit").bind("input propertychange", function () {
-            document.getElementById("sponsorOutput").innerHTML =
-                marked(this.value);
-        });
-
-        $("#locationEdit").bind("input propertychange", function () {
-            document.getElementById("locationOutput").innerHTML =
-                marked(this.value);
-        });
 
         $("#eventStartTime").AnyTime_picker({ format: "%m/%d/%Y %l:%i:%s %p" });
         $("#eventEndTime").AnyTime_picker({ format: "%m/%d/%Y %l:%i:%s %p" });
