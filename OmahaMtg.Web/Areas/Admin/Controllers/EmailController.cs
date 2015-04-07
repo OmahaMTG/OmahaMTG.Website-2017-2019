@@ -69,7 +69,7 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
             {
                 From = model.FromEmail,
                 Subject = model.Subject,
-                TextBody = model.Body,
+                HtmlBody = MarkdownService.GetHtmlFromMarkdown(model.Body),
                
             };
             message.To.Add(SiteEmail);

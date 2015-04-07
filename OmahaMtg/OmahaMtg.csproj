@@ -112,6 +112,7 @@
     <Compile Include="Email\IEmailer.cs" />
     <Compile Include="Groups\GroupManager.cs" />
     <Compile Include="Groups\IGroupManager.cs" />
+    <Compile Include="MarkdownService.cs" />
     <Compile Include="Migrations\201504041842037_Initial Migration.cs" />
     <Compile Include="Migrations\201504041842037_Initial Migration.Designer.cs">
       <DependentUpon>201504041842037_Initial Migration.cs</DependentUpon>
