@@ -32,13 +32,15 @@ namespace OmahaMtgImport.Models
         [PetaPoco.Ignore]
         public TargetPost TargetPost { get; set; }
 
-        public static void AddEvent(TargetEvent targetEvent)
+        public static int AddEvent(TargetEvent targetEvent)
         {
             var db = new PetaPoco.Database("TargetConnection");
             db.Insert("Posts", "Id", true, targetEvent.TargetPost);
 
             targetEvent.Id = targetEvent.TargetPost.Id;
             db.Insert("Events", "Id", false, targetEvent);
+
+            return targetEvent.Id;
         }
     }
 
@@ -54,6 +56,8 @@ namespace OmahaMtgImport.Models
         public bool TwoFactorEnabled { get; set; }
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         private readonly List<string> _admins = new List<string>() { "beolson", "kerdirks", "mruwe", "brammp", "dipetersen" };
 
@@ -158,6 +162,20 @@ namespace OmahaMtgImport.Models
             Roles.Add(adminGuid, "Admin");
             
 
+        }
+    }
+
+    class TargetRsvp
+    {
+        public Guid UserId { get; set; }
+        public DateTime RsvpTime { get; set; }
+        public int EventId { get; set; }
+
+        public static void AddRsvp(TargetRsvp rsvp)
+        {
+            var db = new PetaPoco.Database("TargetConnection");
+            db.Insert("RSVPs", "UserId", false,
+                    new { UserId = rsvp.UserId, RsvpTime = rsvp.RsvpTime, EventId =rsvp.EventId });
         }
     }
 }

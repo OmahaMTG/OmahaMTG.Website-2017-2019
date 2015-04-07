@@ -15,11 +15,12 @@ namespace OmahaMtgImport.Models
         public DateTime? EventEndDate { get; set; }
         public DateTime PostedOn { get; set; }
         public Guid PostedById { get; set; }
+        public int Id { get; set; }
 
         public static List<SourceEvent> GetEvents()
         {
             var db = new PetaPoco.Database("SourceConnection");
-            return db.Query<SourceEvent>(@"Select Subject, Description, Location, StartDate, EndDate, PostedOn, EventStartDate, EventEndDate, username, e.postedbyId
+            return db.Query<SourceEvent>(@"Select Subject, Description, Location, StartDate, EndDate, PostedOn, EventStartDate, EventEndDate, username, e.postedbyId, e.id
                                             from [Events] as e
                                             join aspnet_Users as u on e.postedbyId = u.UserId
                                             order by postedon asc").ToList();
@@ -40,6 +41,8 @@ namespace OmahaMtgImport.Models
         public string UserName { get; set; }
         public string PasswordSalt { get; set; }
         public List<SourceGroup> GroupNames { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
 
 
@@ -48,11 +51,12 @@ namespace OmahaMtgImport.Models
         {
             var db = new PetaPoco.Database("SourceConnection");
             return db.Fetch<SourceUser, SourceGroup, SourceUser>(new UserGroupRelator().MapIt,
-                                            @"select Email, password, passwordSalt, Username, u.UserId, g.Name as GroupName
+                                             @"  select Email, password, passwordSalt, Username, u.UserId, g.Name as GroupName, u2.firstname, u2.lastname
                                             from aspnet_Users as u
-											left join [dbo].[UserGroupMembership] as ug on u.UserId = ug.userid
-											left join [dbo].[UserGroups] as g on ug.[UserGroupID] = g.userGroupID
-                                            left join aspnet_Membership as m on u.UserId = m.UserId").ToList();
+                                            left join [dbo].[UserGroupMembership] as ug on u.UserId = ug.userid
+                                            left join [dbo].[UserGroups] as g on ug.[UserGroupID] = g.userGroupID
+                                            left join aspnet_Membership as m on u.UserId = m.UserId
+                                            left join Users as u2 on u.UserId = u2.UserId").ToList();
 
         } 
     }
@@ -93,4 +97,20 @@ namespace OmahaMtgImport.Models
             return prev;
         }
     }
+
+    class SourceEventRSVP
+    {
+        public Guid UserId { get; set; }
+        public int EventId { get; set; }
+        public DateTime DateAdded { get; set; }
+
+        public static List<SourceEventRSVP> GetRsvpForEvent(int eventid)
+        {
+            var db = new PetaPoco.Database("SourceConnection");
+            return db.Query<SourceEventRSVP>(@"  SELECT userid , eventid, max(DateAdded)  as dateadded  FROM users_events
+                                                    where DateAdded is not null and eventid = @0
+                                                    Group by UserId, eventid", eventid).ToList();
+        } 
+    }
+
 }

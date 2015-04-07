@@ -51,7 +51,21 @@ namespace OmahaMtgImport
                     }
                 };
                 Console.WriteLine("Imprting Event: {0}", targetEvent.TargetPost.Title);
-                TargetEvent.AddEvent(targetEvent);
+                int targetEventId =  TargetEvent.AddEvent(targetEvent);
+
+                var sourceEventRsvps = SourceEventRSVP.GetRsvpForEvent(sourceEvent.Id);
+                Console.WriteLine("Imprting {0} Event RSVPs: {1}", sourceEventRsvps.Count, targetEvent.TargetPost.Title);
+
+                foreach (var sourceRsvp in sourceEventRsvps)
+                {
+                    TargetRsvp.AddRsvp(new TargetRsvp()
+                    {
+                        EventId = targetEventId, RsvpTime = sourceRsvp.DateAdded, UserId = sourceRsvp.UserId
+                    });
+                }
+
+                
+                //TargetEvent.AddEvent(targetEvent);
             }
 
         }
@@ -72,7 +86,9 @@ namespace OmahaMtgImport
                     SecurityStamp = sourceUser.PasswordSalt,
                     UserName = sourceUser.UserName,
                     Id = sourceUser.UserId.ToString(), 
-                    GroupNames = sourceUser.GroupNames
+                    GroupNames = sourceUser.GroupNames, 
+                    FirstName = sourceUser.FirstName,
+                    LastName = sourceUser.LastName
                 };
                 Console.WriteLine("Imprting user {0}", targetUser.UserName);
                 TargetUser.AddUser(targetUser);
