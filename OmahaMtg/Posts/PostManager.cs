@@ -21,7 +21,7 @@ namespace OmahaMtg.Posts
         public static Dictionary<int, string> AvailableGroups;
 
 
-        public PagedSet<PostInfo> GetPosts(int skip, int take, bool includeExpired)
+        public PagedSet<PostInfo> GetPosts(int skip, int take, bool includeExpired, bool includeRsvpCount)
         {
             var posts = _context.Posts
                 .Where(w=> w.PublishStartTime <= DateTime.Now || w.PublishStartTime == null)
@@ -30,6 +30,7 @@ namespace OmahaMtg.Posts
                 .OrderByDescending(o => o.PublishStartTime)
                 .Include(cbu => cbu.CreatedByUser)
                 .Include(g => g.Groups)
+                
                 .Select(s => s);
 
             int totalPosts = posts.Count();
@@ -56,7 +57,8 @@ namespace OmahaMtg.Posts
                         PublishEndTime =  s.PublishEndTime,
                         IsDeleted = s.IsDeleted,
                         AvailableGroups = AvailableGroups,
-                        VimeoId = (s as Event).VimeoId,
+                        VimeoId = (s as Event).VimeoId, 
+                        TotalRsvpCount = includeRsvpCount ?  _context.Rsvps.Count(w => w.EventId == s.Id): 0
                         
                     })  : 
                     new PostInfo()

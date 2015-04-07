@@ -25,7 +25,7 @@ namespace OmahaMtg.Web.Controllers
             skipCount = (page - 1)*10;
 
 
-            return View(pm.GetPosts(skipCount, 10, false));
+            return View(pm.GetPosts(skipCount, 10, false, false));
         }
 
         

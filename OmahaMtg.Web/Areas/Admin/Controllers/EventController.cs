@@ -23,7 +23,7 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
         public ActionResult Index(int page = 1)
         {
             int skip = (page - 1)*10;
-            return View( _pm.GetPosts(skip, 10, true));
+            return View( _pm.GetPosts(skip, 10, true, true));
         }
 
         public ActionResult Details(int id)

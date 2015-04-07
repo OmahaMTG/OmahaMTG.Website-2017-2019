@@ -9,7 +9,7 @@ namespace OmahaMtg.Posts
 {
     public interface IPostManager
     {
-        PagedSet<PostInfo> GetPosts(int skip, int take, bool includeExpired);
+        PagedSet<PostInfo> GetPosts(int skip, int take, bool includeExpired, bool includeRsvpCount);
         PostInfo GetPost(int postId, Guid userId);
         PostInfo GetPost(int postId);
         RsvpInfo UpdateRsvp(Guid userId, int eventId, bool isUserGoing);
