@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,13 +51,42 @@ namespace OmahaMtgImport.Models
         public static List<SourceUser> GetUsers()
         {
             var db = new PetaPoco.Database("SourceConnection");
-            return db.Fetch<SourceUser, SourceGroup, SourceUser>(new UserGroupRelator().MapIt,
-                                             @"  select Email, password, passwordSalt, Username, u.UserId, g.Name as GroupName, u2.firstname, u2.lastname
+            var result = db.Fetch<SourceUser, SourceGroup, SourceUser>(new UserGroupRelator().MapIt,
+                                             @"  select Email, password, passwordSalt, Username, u.UserId, g.Name as GroupName
                                             from aspnet_Users as u
                                             left join [dbo].[UserGroupMembership] as ug on u.UserId = ug.userid
                                             left join [dbo].[UserGroups] as g on ug.[UserGroupID] = g.userGroupID
-                                            left join aspnet_Membership as m on u.UserId = m.UserId
-                                            left join Users as u2 on u.UserId = u2.UserId").ToList();
+                                            left join aspnet_Membership as m on u.UserId = m.UserId").ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine("Getting user names {0}", item.UserName);
+                var names = Models.UserName.GetUserName(item.UserId);
+
+                if (names != null)
+                {
+                    item.FirstName = names.FirstName;
+                    item.LastName = names.LastName;
+                }
+            }
+
+            return result;
+
+        } 
+    }
+
+    class UserName
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        public static UserName GetUserName(Guid userid)
+        {
+            var db = new PetaPoco.Database("SourceConnection");
+            return db.Query<UserName>(" select FirstName, LastName from Users where userid = @0", userid).FirstOrDefault();
+
+
+
 
         } 
     }
