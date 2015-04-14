@@ -135,6 +135,7 @@
     <Compile Include="ApplicationUserManager.cs" />
     <Compile Include="SmsService.cs" />
     <Compile Include="Startup\Startup.Auth.cs" />
+    <Compile Include="WinnerPicker\WinnerPicker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

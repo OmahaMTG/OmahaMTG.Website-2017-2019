@@ -181,6 +181,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmailController.cs" />
     <Compile Include="Areas\Admin\Controllers\EventController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WinnerPickerController.cs" />
     <Compile Include="Areas\Admin\Models\Email\Email.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.min.css" />
     <Content Include="Content\anytime.5.0.5.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -268,6 +270,7 @@
     <Content Include="newrelic\Extensions\extension.xsd">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\Admin\Views\WinnerPicker\Index.cshtml" />
     <None Include="newrelic\newrelic.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -280,6 +283,8 @@
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.lettering.js" />
+    <Content Include="Scripts\jquery.textillate.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

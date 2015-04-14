@@ -1,0 +1,78 @@
+﻿@model int
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Styles.Render("~/Content/textillate")
+
+<br/><br /><br /><br />
+
+<div class="row">
+    <div class="col-md-12 text-center">
+
+
+        <button id="getWinner" class="button small info">Get a Winner</button>
+        <br/>
+        <br/>
+        <br/>
+        <h1 id="winner" ></h1>
+    </div>
+</div>
+
+
+@section Scripts{
+    @Scripts.Render("~/bundles/textillate")
+
+
+
+    <script>
+        $('#winner').textillate({ in: { effect: 'fadeInDownBig', shuffle: true }, autoStart: false });
+        displayWinner = function(winner) {
+
+            $('#winner').find('.texts  li:first').text(winner);
+            $('#winner').textillate('start');
+
+            //   $("#winner").show();
+        }
+        $("#getWinner").click(function() {
+
+                var url = "/Admin/WinnerPicker/GetWinner";
+                var requestData = {
+                    numberOfWinnersToGet: 1,
+                    eventId: @Model
+                };
+
+
+                $.ajax({
+                    url: url,
+                    async: true,
+                    dataType: "json",
+                    type: "GET",
+                    data: requestData,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function(data) {
+                        console.log(data);
+                        displayWinner(data);
+                    },
+                    error: function(data) {
+                        displayWinner(data);
+                    },
+                    statusCode: {
+                        400: function() {
+                            displayWinner("Error Sending Emails");
+                        }
+                    }
+                });
+
+            }
+        );
+
+
+        //$(function () {
+        //    $('#winner').textillate({ in: { effect: 'fadeInDownBig', shuffle: true } });
+
+
+//})
+    </script>
+}

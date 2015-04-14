@@ -44,6 +44,14 @@ namespace OmahaMtg.Web
                       "~/Content/iconFont.min.css",
                       "~/Content/site.css"));
 
+
+            bundles.Add(new ScriptBundle("~/bundles/textillate").Include(
+          "~/Scripts/jquery.lettering.js", "~/Scripts/jquery.textillate.js"));
+
+            bundles.Add(new StyleBundle("~/Content/textillate").Include(
+               "~/Content/animate.min.css"
+                ));
+
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = false;

@@ -12,3 +12,5 @@
 /// <reference path="anytime.5.0.5.min.js" />
 /// <reference path="metro-tab-control.js" />
 /// <reference path="jquery.widget.min.js" />
+/// <reference path="jquery.textillate.js" />
+/// <reference path="jquery.lettering.js" />

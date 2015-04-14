@@ -46,7 +46,8 @@
                 <div>
                     @Html.ActionLink("Edit", "Details", "Event", new { Area = "Admin", Id = item.Id }, new { @class = "button small info" })
                     @Html.ActionLink("RSVPs", "download", "Event", new { Area = "Admin", eventId = item.Id }, new { @class = "button small info" })
-            
+                    <br/><br/>
+                    @Html.ActionLink("WinnerPicker", "index", "WinnerPicker", new { Area = "Admin", eventId = item.Id }, new { @class = "button small info" })
                 </div>
 
             </td>
