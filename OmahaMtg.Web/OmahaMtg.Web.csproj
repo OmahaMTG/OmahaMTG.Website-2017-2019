@@ -202,6 +202,7 @@
   <ItemGroup>
     <Content Include="Content\animate.min.css" />
     <Content Include="Content\anytime.5.0.5.min.css" />
+    <Content Include="Content\bootstrap-markdown.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -277,6 +278,7 @@
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="newrelic\NewRelic.Profiler.dll" />
     <Content Include="Scripts\anytime.5.0.5.min.js" />
+    <Content Include="Scripts\bootstrap-markdown.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />

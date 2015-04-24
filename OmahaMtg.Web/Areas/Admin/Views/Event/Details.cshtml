@@ -10,14 +10,7 @@
     @Scripts.Render("~/bundles/anytimejs")
     <script>
 
-        document.getElementById("bodyOutput").innerHTML = marked($("#bodyEdit").val());
 
-
-
-        $("#bodyEdit").bind("input propertychange", function () {
-            document.getElementById("bodyOutput").innerHTML =
-                marked(this.value);
-        });
 
 
         $("#eventStartTime").AnyTime_picker({ format: "%m/%d/%Y %l:%i:%s %p" });
@@ -43,19 +36,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6" style="height: 100%">
+            <div class="col-md-12" style="height: 100%">
                 <label>Body <a href="http://thisismarkdown.com/" target="_blank">This Is Markdown</a></label>
                 <div class="input-control text " data-role="input-control" style="bottom: 5px; height: 100%">
-                    <textarea id="bodyEdit" name="Body" style="max-width: none; width: 100%; height: 400px" tabindex="2" rows="50">@Model.Body</textarea>
+                    <textarea id="bodyEdit" name="Body" style="max-width: none; width: 100%; height: 400px" tabindex="2" rows="50" data-provide="markdown">@Model.Body</textarea>
                     <br/>
                 </div>
             </div>
-            <div class="col-md-6">
-                <label>Preview</label>
-                <div id="bodyOutput">
-                    
-                </div>
-            </div>
+
         </div>
         <div class="row">
             <div class="col-md-6">

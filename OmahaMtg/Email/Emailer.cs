@@ -44,7 +44,7 @@ namespace OmahaMtg.Email
             // Add the message properties.
             myMessage.From = new MailAddress(emailInfo.From);
 
-            myMessage.AddTo(emailInfo.To);
+            myMessage.AddTo(emailInfo.From);
             
             foreach (var address in emailInfo.Bcc)
             {
@@ -81,5 +81,6 @@ namespace OmahaMtg.Email
                 //default(T);
             }
         }
+
     }
 }

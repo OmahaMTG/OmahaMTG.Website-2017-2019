@@ -14,3 +14,4 @@
 /// <reference path="jquery.widget.min.js" />
 /// <reference path="jquery.textillate.js" />
 /// <reference path="jquery.lettering.js" />
+/// <reference path="bootstrap-markdown.js" />

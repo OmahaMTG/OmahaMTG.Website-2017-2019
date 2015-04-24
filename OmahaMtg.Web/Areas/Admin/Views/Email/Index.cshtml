@@ -62,16 +62,12 @@
 
                 </div>
             <div class="row">
-                <div class="col-md-6" style="height: 100%">
+                <div class="col-md-12" style="height: 100%">
                     <label>Body (Markdown)</label>
                     <div class="input-control text " data-role="input-control" style="bottom: 5px; height: 100%">
-                        <textarea id="body" name="body" style="max-width: none; width: 100%; height: 400px" tabindex="2" rows="50">@Model.Body</textarea>
+                        <textarea id="body" name="body" style="max-width: none; width: 100%; height: 400px" tabindex="2" rows="50" data-provide="markdown">@Model.Body</textarea>
                         <br/>
                     </div>
-                </div>
-                <div class="col-md-6" style="height: 100%">
-                    <label>Body Preview</label>
-                    <div id="bodyPreview"></div>
                 </div>
             </div>
 
@@ -106,19 +102,7 @@
 @section scripts
 {
 @Scripts.Render("~/bundles/marked")
-<script>
 
-    document.getElementById("bodyPreview").innerHTML = marked($("#body").val());
-
-
-
-    $("#body").bind("input propertychange", function () {
-        document.getElementById("bodyPreview").innerHTML =
-            marked(this.value);
-    });
-
-
-</script>
 
 
     <script>
@@ -149,7 +133,7 @@
                         subject: $("#subject").val(),
                         body: $("#body").val(),
                         fromEmail: $("#fromEmail").val(),
-                        sendAsTest: $("#SendAsTest").val(),
+                        sendAsTest: $("#SendAsTest").prop('checked'),
                         recipientGroups: recipientGroups
                     };
 
