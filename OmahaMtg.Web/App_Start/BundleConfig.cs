@@ -11,7 +11,7 @@ namespace OmahaMtg.Web
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery.widget.min.js",
-                         "~/Scripts/metro-tab-control.js",
+                       //  "~/Scripts/metro-tab-control.js",
                         "~/Scripts/site.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -40,8 +40,8 @@ namespace OmahaMtg.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/metro-bootstrap.min.css",
-                      "~/Content/metro-bootstrap-responsive.min.css",
+                    //  "~/Content/metro-bootstrap.min.css",
+                    //  "~/Content/metro-bootstrap-responsive.min.css",
                      // "~/Content/iconFont.min.css",
                       "~/Content/site.css",
                       "~/Content/bootstrap-markdown.min.css"));
