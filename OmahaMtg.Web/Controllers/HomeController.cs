@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using OmahaMtg.Posts;
+using OmahaMtg.Events;
 
 namespace OmahaMtg.Web.Controllers
 {
@@ -18,14 +18,14 @@ namespace OmahaMtg.Web.Controllers
 
         public ActionResult Index(int page =1)
         {
-            OmahaMtg.Posts.IPostManager pm = new PostManager();
+            OmahaMtg.Events.IEventManager pm = new EventManager();
 
             int skipCount = 0;
 
             skipCount = (page - 1)*10;
 
 
-            return View(pm.GetPosts(skipCount, 10, false, false));
+            return View(pm.GetEvents(skipCount, 10, false, false));
         }
 
         

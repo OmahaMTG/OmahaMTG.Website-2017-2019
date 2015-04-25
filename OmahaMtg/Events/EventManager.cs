@@ -7,12 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using OmahaMtg.Data;
 
-namespace OmahaMtg.Posts
+namespace OmahaMtg.Events
 {
-    public class PostManager : IPostManager
+    public class EventManager : IEventManager
     {
         private ApplicationDbContext _context;
-        public PostManager()
+        public EventManager()
         {
             _context = new ApplicationDbContext();
             AvailableGroups = _context.Groups.ToDictionary(g => g.Id, g => g.Name); 
@@ -21,9 +21,9 @@ namespace OmahaMtg.Posts
         public static Dictionary<int, string> AvailableGroups;
 
 
-        public PagedSet<PostInfo> GetPosts(int skip, int take, bool includeExpired, bool includeRsvpCount)
+        public PagedSet<EventInfo> GetEvents(int skip, int take, bool includeExpired, bool includeRsvpCount)
         {
-            var posts = _context.Posts
+            var posts = _context.Events
                 .Where(w=> w.PublishStartTime <= DateTime.Now || w.PublishStartTime == null)
                 .Where(w => w.PublishEndTime >= DateTime.Now || w.PublishEndTime == null || includeExpired)
                 .Where(w => !w.IsDeleted)
@@ -41,7 +41,7 @@ namespace OmahaMtg.Posts
 
             var mappedPosts = posts.Skip(skip).Take(take).ToList()
                 .Select(s =>
-                    s is Event ? (new EventInfo()
+                   new EventInfo()
                     {
                         PublishStartTime = s.PublishStartTime,
                         Body = s.Body,
@@ -60,26 +60,9 @@ namespace OmahaMtg.Posts
                         VimeoId = (s as Event).VimeoId, 
                         TotalRsvpCount = includeRsvpCount ?  _context.Rsvps.Count(w => w.EventId == s.Id): 0
                         
-                    })  : 
-                    new PostInfo()
-                    {
-                        PublishStartTime = s.PublishStartTime,
-                        Body = s.Body,
-                        HtmlBody = md.Transform(s.Body),
-                        HtmlBodySummary = md.Transform(s.Body.Length <= 500 ? s.Body : s.Body.Substring(0, 500)),
-                        CreatedByUserId = s.CreatedByUserId,
-                        CreatedByUserName = GetUserName(s.CreatedByUser),
-                        Id = s.Id,
-                        Title = s.Title,
-                        GroupTags = s.Groups.Select(g => g.Id), 
-                        PublishEndTime = s.PublishEndTime,
-                        IsDeleted = s.IsDeleted,
-                        AvailableGroups = AvailableGroups
-                    }
-                
-                );
+                    });
 
-            return new PagedSet<PostInfo>(totalPosts,skip, take,  mappedPosts);
+            return new PagedSet<EventInfo>(totalPosts,skip, take,  mappedPosts);
         }
 
         private static string GetUserName(User user)
@@ -94,9 +77,9 @@ namespace OmahaMtg.Posts
             return userName;
         }
 
-        public PostInfo GetPost(int postId)
+        public EventInfo GetEvent(int postId)
         {
-            var post = _context.Posts
+            var post = _context.Events
                 .Include(g => g.Groups)
                 .Include(u => u.CreatedByUser)
                 .FirstOrDefault(w => w.Id == postId);
@@ -105,12 +88,10 @@ namespace OmahaMtg.Posts
             md.ExtraMode = true;
             md.SafeMode = false;
 
-            PostInfo mappedPost;
+            EventInfo mappedPost;
 
 
-            if (post is Event)
-            {
-                
+
                 mappedPost = new EventInfo()
                 {
                     PublishStartTime = post.PublishStartTime,
@@ -129,42 +110,22 @@ namespace OmahaMtg.Posts
                     CreatedByUserName = GetUserName(post.CreatedByUser),
                     VimeoId = (post as Event).VimeoId
                 };
-            }
-            else
-            {
-                mappedPost = new PostInfo()
-                {
-                    PublishStartTime = post.PublishStartTime,
-                    PublishEndTime =  post.PublishEndTime,
-                        IsDeleted = post.IsDeleted,
-                    Body = post.Body,
-                    HtmlBody = md.Transform(post.Body),
-                    HtmlBodySummary = md.Transform(post.Body.Length <= 500 ? post.Body : post.Body.Substring(0, 500)),
-                    CreatedByUserId = post.CreatedByUserId,
-                    Id = post.Id,
-                    Title = post.Title,
-                    AvailableGroups = AvailableGroups,
-                    GroupTags = post.Groups.Select(g => g.Id),
-                    CreatedByUserName = GetUserName(post.CreatedByUser)
-                };
-            }
+
             return mappedPost;
         }
 
-        public PostInfo GetPost(int postId, Guid userId)
+        public EventInfo GetEvent(int postId, Guid userId)
         {
-            var result = GetPost(postId);
+            var result = GetEvent(postId);
 
-            if (result is EventInfo)
-            {
-                var totalRsvp = _context.Rsvps.Where(w => w.EventId == postId).Count();
 
-                var isUserRsvp = _context.Rsvps.Where(w => w.EventId == postId && w.UserId == userId).Count() > 0;
+            var totalRsvp = _context.Rsvps.Where(w => w.EventId == postId).Count();
 
-                ((EventInfo)result).IsUserRsvpd = isUserRsvp;
-                ((EventInfo)result).TotalRsvpCount = totalRsvp;
-               
-            }
+            var isUserRsvp = _context.Rsvps.Where(w => w.EventId == postId && w.UserId == userId).Count() > 0;
+
+            ((EventInfo)result).IsUserRsvpd = isUserRsvp;
+            ((EventInfo)result).TotalRsvpCount = totalRsvp;
+
 
             return result;
 

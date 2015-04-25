@@ -5,13 +5,13 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OmahaMtg.Posts
+namespace OmahaMtg.Events
 {
-    public interface IPostManager
+    public interface IEventManager
     {
-        PagedSet<PostInfo> GetPosts(int skip, int take, bool includeExpired, bool includeRsvpCount);
-        PostInfo GetPost(int postId, Guid userId);
-        PostInfo GetPost(int postId);
+        PagedSet<EventInfo> GetEvents(int skip, int take, bool includeExpired, bool includeRsvpCount);
+        EventInfo GetEvent(int eventId, Guid userId);
+        EventInfo GetEvent(int eventId);
         RsvpInfo UpdateRsvp(Guid userId, int eventId, bool isUserGoing);
 
         void UpdateEvent(EventInfo updateEvent);

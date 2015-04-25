@@ -3,50 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using OmahaMtg.Posts;
+
 using Microsoft.AspNet.Identity;
+using OmahaMtg.Events;
 using OmahaMtg.Web.Models.PostViewModels;
 
 namespace OmahaMtg.Web.Controllers
 {
-    public class PostController : Controller
+    public class EventController : Controller
     {
+        private OmahaMtg.Events.IEventManager _em;
+        public EventController()
+        {
+            _em = new EventManager();
+        }
 
         // GET: Post/Details/5
         public ActionResult Details(int id)
         {
-            OmahaMtg.Posts.IPostManager pm = new PostManager();
-
             if (User.Identity.IsAuthenticated)
             {
-                return View(pm.GetPost(id, new Guid(User.Identity.GetUserId())));
+                return View(_em.GetEvent(id, new Guid(User.Identity.GetUserId())));
             }
             else
             {
-                return View(pm.GetPost(id));
+                return View(_em.GetEvent(id));
             }
         }
 
         [HttpPost]
         public JsonResult RsvpForEvent(RsvpForEventViewModel model)
         {
-
-            OmahaMtg.Posts.IPostManager pm = new PostManager();
-            return Json(pm.UpdateRsvp(new Guid(User.Identity.GetUserId()), model.EventId, model.UserIsGoing));
-
+            return Json(_em.UpdateRsvp(new Guid(User.Identity.GetUserId()), model.EventId, model.UserIsGoing));
         }
 
         public ActionResult UpcomingEvents()
         {
-            OmahaMtg.Posts.IPostManager pm = new PostManager();
-            return View(pm.GetUpcomingEvents(5));
-
+            return View(_em.GetUpcomingEvents(5));
         }
 
         public ActionResult RecentVideos()
         {
-            OmahaMtg.Posts.IPostManager pm = new PostManager();
-            return View(pm.GetLatestEventsWithVideos(5));
+            return View(_em.GetLatestEventsWithVideos(5));
         }
 
     }

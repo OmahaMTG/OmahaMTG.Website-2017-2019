@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using DocumentFormat.OpenXml.Office2010.ExcelAc;
 using OmahaMtg.Data;
-using OmahaMtg.Posts.Report;
+using OmahaMtg.Events.Report;
 
 namespace OmahaMtg.WinnerPicker
 {

@@ -8,7 +8,7 @@ namespace OmahaMtg.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Posts",
+                "dbo.Events",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -20,6 +20,11 @@ namespace OmahaMtg.Migrations
                         ModifiedTime = c.DateTime(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
                         CreatedByUserId = c.Guid(nullable: false),
+                        EventStartTime = c.DateTime(),
+                        EventEndTime = c.DateTime(),
+                        Location = c.String(),
+                        Sponsor = c.String(),
+                        VimeoId = c.Long(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.CreatedByUserId, cascadeDelete: true)
@@ -106,8 +111,8 @@ namespace OmahaMtg.Migrations
                         RsvpTime = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => new { t.UserId, t.EventId })
-                .ForeignKey("dbo.Events", t => t.EventId)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Events", t => t.EventId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
                 .Index(t => t.UserId)
                 .Index(t => t.EventId);
             
@@ -120,19 +125,6 @@ namespace OmahaMtg.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
-            CreateTable(
-                "dbo.PostGroups",
-                c => new
-                    {
-                        PostId = c.Int(nullable: false),
-                        GroupId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.PostId, t.GroupId })
-                .ForeignKey("dbo.Posts", t => t.PostId, cascadeDelete: true)
-                .ForeignKey("dbo.Groups", t => t.GroupId, cascadeDelete: true)
-                .Index(t => t.PostId)
-                .Index(t => t.GroupId);
             
             CreateTable(
                 "dbo.UserGroups",
@@ -148,41 +140,37 @@ namespace OmahaMtg.Migrations
                 .Index(t => t.GroupId);
             
             CreateTable(
-                "dbo.Events",
+                "dbo.EventGroups",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
-                        EventStartTime = c.DateTime(),
-                        EventEndTime = c.DateTime(),
-                        Location = c.String(),
-                        Sponsor = c.String(),
-                        VimeoId = c.Long(),
+                        EventId = c.Int(nullable: false),
+                        GroupId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Posts", t => t.Id)
-                .Index(t => t.Id);
+                .PrimaryKey(t => new { t.EventId, t.GroupId })
+                .ForeignKey("dbo.Events", t => t.EventId, cascadeDelete: true)
+                .ForeignKey("dbo.Groups", t => t.GroupId, cascadeDelete: true)
+                .Index(t => t.EventId)
+                .Index(t => t.GroupId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Events", "Id", "dbo.Posts");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.EventGroups", "GroupId", "dbo.Groups");
+            DropForeignKey("dbo.EventGroups", "EventId", "dbo.Events");
+            DropForeignKey("dbo.Events", "CreatedByUserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Rsvps", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Rsvps", "EventId", "dbo.Events");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.UserGroups", "GroupId", "dbo.Groups");
             DropForeignKey("dbo.UserGroups", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.PostGroups", "GroupId", "dbo.Groups");
-            DropForeignKey("dbo.PostGroups", "PostId", "dbo.Posts");
-            DropForeignKey("dbo.Posts", "CreatedByUserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropIndex("dbo.Events", new[] { "Id" });
+            DropIndex("dbo.EventGroups", new[] { "GroupId" });
+            DropIndex("dbo.EventGroups", new[] { "EventId" });
             DropIndex("dbo.UserGroups", new[] { "GroupId" });
             DropIndex("dbo.UserGroups", new[] { "UserId" });
-            DropIndex("dbo.PostGroups", new[] { "GroupId" });
-            DropIndex("dbo.PostGroups", new[] { "PostId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Rsvps", new[] { "EventId" });
             DropIndex("dbo.Rsvps", new[] { "UserId" });
@@ -191,10 +179,9 @@ namespace OmahaMtg.Migrations
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Posts", new[] { "CreatedByUserId" });
-            DropTable("dbo.Events");
+            DropIndex("dbo.Events", new[] { "CreatedByUserId" });
+            DropTable("dbo.EventGroups");
             DropTable("dbo.UserGroups");
-            DropTable("dbo.PostGroups");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Rsvps");
             DropTable("dbo.AspNetUserRoles");
@@ -202,7 +189,7 @@ namespace OmahaMtg.Migrations
             DropTable("dbo.Groups");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.Posts");
+            DropTable("dbo.Events");
         }
     }
 }

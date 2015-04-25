@@ -21,11 +21,11 @@ namespace OmahaMtg.Data
             
 
             modelBuilder.Configurations.Add(new RsvpConfiguration());
-            modelBuilder.Configurations.Add(new PostConfiguration());
+            modelBuilder.Configurations.Add(new EventConfiguration());
             modelBuilder.Configurations.Add(new UserConfiguration());
 
             modelBuilder.Entity<Event>().ToTable("Events");
-            modelBuilder.Entity<Post>().ToTable("Posts");
+
 
             base.OnModelCreating(modelBuilder);
         }
@@ -36,9 +36,8 @@ namespace OmahaMtg.Data
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<Event> Events { get; set; }
         public System.Data.Entity.DbSet<Rsvp> Rsvps { get; set; }
-        public System.Data.Entity.DbSet<Post> Posts { get; set; }
+        public System.Data.Entity.DbSet<Event> Events { get; set; }
         public System.Data.Entity.DbSet<Group> Groups { get; set; }
 
 

@@ -4,17 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using OmahaMtg.Posts;
-using OmahaMtg.Posts.Report;
+using OmahaMtg.Events;
+using OmahaMtg.Events;
+using OmahaMtg.Events.Report;
 
 namespace OmahaMtg.Web.Areas.Admin.Controllers
 {
     public class EventController : Controller
     {
-        private OmahaMtg.Posts.IPostManager _pm;
+        private OmahaMtg.Events.IEventManager _pm;
         public EventController()
         {
-            _pm = new PostManager();
+            _pm = new EventManager();
 
 
 
@@ -23,12 +24,12 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
         public ActionResult Index(int page = 1)
         {
             int skip = (page - 1)*10;
-            return View( _pm.GetPosts(skip, 10, true, true));
+            return View( _pm.GetEvents(skip, 10, true, true));
         }
 
         public ActionResult Details(int id)
         {
-            return View(_pm.GetPost(id));
+            return View(_pm.GetEvent(id));
         }
 
         public ActionResult New()

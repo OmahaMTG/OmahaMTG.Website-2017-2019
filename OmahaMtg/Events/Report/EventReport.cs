@@ -6,7 +6,7 @@ using System.Linq;
 using ClosedXML.Excel;
 using OmahaMtg.Data;
 
-namespace OmahaMtg.Posts.Report
+namespace OmahaMtg.Events.Report
 {
 
 

@@ -20,7 +20,7 @@ namespace OmahaMtg.Data
 
             HasMany(e => e.Rsvps)
                 .WithRequired(e => e.User)
-                .HasForeignKey(k => k.UserId);
+                .HasForeignKey(k => k.UserId).WillCascadeOnDelete(false);
 
         }
     }

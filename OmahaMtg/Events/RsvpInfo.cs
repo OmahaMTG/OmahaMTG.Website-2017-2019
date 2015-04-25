@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OmahaMtg.Posts
+namespace OmahaMtg.Events
 {
     public class RsvpInfo
     {

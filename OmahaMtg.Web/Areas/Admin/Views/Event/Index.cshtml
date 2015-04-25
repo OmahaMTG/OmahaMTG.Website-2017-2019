@@ -1,5 +1,5 @@
 ﻿@using System.Activities.Statements
-@model OmahaMtg.PagedSet<OmahaMtg.Posts.PostInfo>
+@model OmahaMtg.PagedSet<OmahaMtg.Events.EventInfo>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -65,7 +65,7 @@
             </td>
             <td>
                 @{
-                    var info = item as OmahaMtg.Posts.EventInfo;
+                    var info = item as OmahaMtg.Events.EventInfo;
                     if (info != null)
                     {
                         <text>@info.EventStartTime</text>

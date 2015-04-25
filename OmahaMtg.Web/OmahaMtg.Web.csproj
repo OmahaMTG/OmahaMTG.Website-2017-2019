@@ -187,7 +187,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
-    <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -337,10 +337,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Post\Details.cshtml" />
+    <Content Include="Views\Event\Details.cshtml" />
     <Content Include="Views\Shared\_SplitLayout.cshtml" />
-    <Content Include="Views\Post\RecentVideos.cshtml" />
-    <Content Include="Views\Post\UpcomingEvents.cshtml" />
+    <Content Include="Views\Event\RecentVideos.cshtml" />
+    <Content Include="Views\Event\UpcomingEvents.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />

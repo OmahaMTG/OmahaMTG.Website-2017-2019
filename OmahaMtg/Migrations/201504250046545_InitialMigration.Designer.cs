@@ -13,7 +13,7 @@ namespace OmahaMtg.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201504041842037_Initial Migration"; }
+            get { return "201504250046545_InitialMigration"; }
         }
         
         string IMigrationMetadata.Source

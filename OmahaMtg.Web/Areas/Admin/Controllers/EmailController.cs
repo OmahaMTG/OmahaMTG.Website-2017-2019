@@ -10,8 +10,9 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using OmahaMtg.Email;
+using OmahaMtg.Events;
 using OmahaMtg.Groups;
-using OmahaMtg.Posts;
+using OmahaMtg.Events;
 using OmahaMtg.Profile;
 
 using ModelBinderAttribute = System.Web.Http.ModelBinding.ModelBinderAttribute;
@@ -20,12 +21,12 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
 {
     public class EmailController : Controller
     {
-        private IPostManager _pm;
+        private IEventManager _pm;
         private IProfileManager _profileManager;
         private IGroupManager _gm;
         public EmailController()
         {
-            _pm = new PostManager();
+            _pm = new EventManager();
             _gm = new GroupManager();
             _profileManager = new ProfileManager();
         }

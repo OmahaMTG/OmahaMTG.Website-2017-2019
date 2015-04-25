@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace OmahaMtg.Data
 {
-    class PostConfiguration : EntityTypeConfiguration<Post>
+    class EventConfiguration : EntityTypeConfiguration<Event>
     {
-        public PostConfiguration()
+        public EventConfiguration()
         {
             HasRequired(x => x.CreatedByUser)
                 .WithMany()
@@ -17,8 +17,8 @@ namespace OmahaMtg.Data
 
 
             HasMany(e => e.Groups)
-                .WithMany(e => e.Posts)
-                .Map(m=> m.MapLeftKey("PostId")
+                .WithMany(e => e.Events)
+                .Map(m=> m.MapLeftKey("EventId")
                     .MapRightKey("GroupId"));
         }
     }

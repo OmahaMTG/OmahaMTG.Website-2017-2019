@@ -100,8 +100,7 @@
     <Compile Include="Data\Event.cs" />
     <Compile Include="Data\Group.cs" />
     <Compile Include="Data\IdentityModels.cs" />
-    <Compile Include="Data\Post.cs" />
-    <Compile Include="Data\PostConfiguration.cs" />
+    <Compile Include="Data\EventConfiguration.cs" />
     <Compile Include="Data\Rsvp.cs" />
     <Compile Include="Data\UserConfiguration.cs" />
     <Compile Include="Data\RsvpConfiguration.cs" />
@@ -113,21 +112,20 @@
     <Compile Include="Groups\GroupManager.cs" />
     <Compile Include="Groups\IGroupManager.cs" />
     <Compile Include="MarkdownService.cs" />
-    <Compile Include="Migrations\201504041842037_Initial Migration.cs" />
-    <Compile Include="Migrations\201504041842037_Initial Migration.Designer.cs">
-      <DependentUpon>201504041842037_Initial Migration.cs</DependentUpon>
+    <Compile Include="Migrations\201504250046545_InitialMigration.cs" />
+    <Compile Include="Migrations\201504250046545_InitialMigration.Designer.cs">
+      <DependentUpon>201504250046545_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PagedSet.cs" />
-    <Compile Include="Posts\EventInfo.cs" />
-    <Compile Include="Posts\IPostManager.cs" />
-    <Compile Include="Posts\PostInfo.cs" />
-    <Compile Include="Posts\PostManager.cs" />
-    <Compile Include="Posts\Report\EventReport.cs" />
-    <Compile Include="Posts\Report\IEventReport.cs" />
-    <Compile Include="Posts\Report\RsvpReportRow.cs" />
+    <Compile Include="Events\EventInfo.cs" />
+    <Compile Include="Events\IEventManager.cs" />
+    <Compile Include="Events\EventManager.cs" />
+    <Compile Include="Events\Report\EventReport.cs" />
+    <Compile Include="Events\Report\IEventReport.cs" />
+    <Compile Include="Events\Report\RsvpReportRow.cs" />
     <Compile Include="Profile\ProfileInfo.cs" />
-    <Compile Include="Posts\RsvpInfo.cs" />
+    <Compile Include="Events\RsvpInfo.cs" />
     <Compile Include="Profile\IProfileManager.cs" />
     <Compile Include="Profile\ProfileManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -142,8 +140,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201504041842037_Initial Migration.resx">
-      <DependentUpon>201504041842037_Initial Migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504250046545_InitialMigration.resx">
+      <DependentUpon>201504250046545_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
