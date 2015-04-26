@@ -37,9 +37,6 @@ namespace OmahaMtgImport
                     EventEndTime = sourceEvent.EventEndDate,
                     EventStartTime = sourceEvent.EventStartDate,
                     Location = sourceEvent.Location,
-                    
-                    TargetPost = new TargetPost()
-                    {
                         CreatedTime = sourceEvent.PostedOn,
                         ModifiedTime = DateTime.Now,
                         Body = FixupHtmlToMarkdown(sourceEvent.Description),
@@ -48,13 +45,13 @@ namespace OmahaMtgImport
                         PublishStartTime = sourceEvent.PostedOn, 
                         IsDeleted = false,
                         PublishEndTime = null
-                    }
+
                 };
-                Console.WriteLine("Imprting Event: {0}", targetEvent.TargetPost.Title);
+                Console.WriteLine("Imprting Event: {0}", targetEvent.Title);
                 int targetEventId =  TargetEvent.AddEvent(targetEvent);
 
                 var sourceEventRsvps = SourceEventRSVP.GetRsvpForEvent(sourceEvent.Id);
-                Console.WriteLine("Imprting {0} Event RSVPs: {1}", sourceEventRsvps.Count, targetEvent.TargetPost.Title);
+                Console.WriteLine("Imprting {0} Event RSVPs: {1}", sourceEventRsvps.Count, targetEvent.Title);
 
                 foreach (var sourceRsvp in sourceEventRsvps)
                 {

@@ -37,12 +37,27 @@ textarea {
     color:#ffffff
 }
 
+.navbar-default .navbar-nav > form > li > a {
+    color: #ffffff;
+
+    position: relative;
+  display: block;
+  padding: 15px 15px;
+}
+
+
+.navbar-nav > form > li {
+  float: left;
+}
+
 .navbar-default .navbar-brand{
     color: #ffffff;
     font-family: 'Segoe UI Light_','Open Sans Light',Verdana,Arial,Helvetica,sans-serif;
       font-size: 14px;
         text-decoration: none;  line-height: 15px;  height: 45px;
 }
+
+
 
 
 html {
@@ -66,5 +81,6 @@ body {
 body {
     padding-top: 71px;
     padding-bottom: 20px;
+
 
 }

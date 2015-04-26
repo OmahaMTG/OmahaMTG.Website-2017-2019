@@ -210,8 +210,6 @@
     <Content Include="Content\flat-ui.css" />
     <Content Include="Content\iconFont.min.css" />
     <Content Include="Content\jquery-ui.min.css" />
-    <Content Include="Content\metro-bootstrap-responsive.min.css" />
-    <Content Include="Content\metro-bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\iconFont.dev.svg" />
@@ -293,8 +291,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery.widget.min.js" />
     <Content Include="Scripts\marked.min.js" />
-    <Content Include="Scripts\metro-tab-control.js" />
-    <Content Include="Scripts\metro.min.js" />
     <Content Include="Scripts\modernizr-2.7.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />

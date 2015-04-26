@@ -14,25 +14,32 @@
 
 <br/>
 
-<div class="tab-control" data-role="tab-control">
-    <ul class="tabs">
-        <li class="active"><a href="#_dotnet">.NET Group Sponsors</a></li>
-        <li><a href="#_sharepoint">Sharepoint Group Sponsors</a></li>
-        <li><a href="#_sqlbi">SQL/BI Group Sponsors</a></li>
-        <li><a href="#_website">Website Sponsors</a></li>
+<div role="tabpanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">.NET Group Sponsors</a></li>
+        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Sharepoint Group Sponsors</a></li>
+        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">SQL/BI Group Sponsors</a></li>
+        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Website Sponsors</a></li>
     </ul>
 
-    <div class="frames">
-        <div class="frame" id="_dotnet">List .Net sponsors</div>
-        <div class="frame" id="_sharepoint">List Sharepoint Sponsors</div>
-        <div class="frame" id="_sqlbi">List SQL Sponsors</div>
-        <div class="frame" id="_website">
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home">List .Net sponsors</div>
+        <div role="tabpanel" class="tab-pane" id="profile">List Sharepoint Sponsors</div>
+        <div role="tabpanel" class="tab-pane" id="messages">List SQL Sponsors</div>
+        <div role="tabpanel" class="tab-pane" id="settings">
+            <br/>
             <p>
-                Site hosting provided by <a href="http://www.hero4hire.com" target="_blank">www.Hero4Hire.com</a>
+                Site hosting provided by <a href="http://www.DiscountASP.net" target="_blank">www.DiscountASP.net</a>
             </p>
         </div>
     </div>
+
 </div>
+
+
 
 @section Scripts{
     <script>

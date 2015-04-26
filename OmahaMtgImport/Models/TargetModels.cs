@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace OmahaMtgImport.Models
 {
-    class TargetPost
-    {
-        public int Id { get; set; }
+
+
+    class TargetEvent
+    {   
         public string Title { get; set; }
         public string Body { get; set; }
         public string CreatedByUserId { get; set; }
@@ -18,10 +19,6 @@ namespace OmahaMtgImport.Models
         public DateTime PublishStartTime { get; set; }
         public DateTime? PublishEndTime { get; set; }
         public bool IsDeleted { get; set; }
-    }
-
-    class TargetEvent
-    {
         public int Id { get; set; }
         public DateTime? EventStartTime { get; set; }
         public DateTime? EventEndTime { get; set; }
@@ -29,17 +26,12 @@ namespace OmahaMtgImport.Models
         public string Sponsor { get; set; }
 
 
-        [PetaPoco.Ignore]
-        public TargetPost TargetPost { get; set; }
+
 
         public static int AddEvent(TargetEvent targetEvent)
         {
             var db = new PetaPoco.Database("TargetConnection");
-            db.Insert("Posts", "Id", true, targetEvent.TargetPost);
-
-            targetEvent.Id = targetEvent.TargetPost.Id;
-            db.Insert("Events", "Id", false, targetEvent);
-
+            db.Insert("Events", "Id", true, targetEvent);
             return targetEvent.Id;
         }
     }

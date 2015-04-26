@@ -9,13 +9,11 @@
         @foreach (var item in Model.Records)
         {
 
-            <h3 style="margin-top: 20px">@Html.ActionLink(item.Title, "Details", "Post", new { id = item.Id }, null) </h3>
-            var info = item as EventInfo;
-            if (info != null)
-            {
-                <h5>@info.EventStartTime </h5>
+            <h3 style="margin-top: 20px">@Html.ActionLink(item.Title, "Details", "Event", new { id = item.Id }, null) </h3>
 
-            }
+    <span>Start Time: @item.EventStartTime </span>
+
+
 
             <hr style="margin: 0" />
 

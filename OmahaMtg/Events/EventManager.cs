@@ -46,7 +46,7 @@ namespace OmahaMtg.Events
                         PublishStartTime = s.PublishStartTime,
                         Body = s.Body,
                         HtmlBody = md.Transform(s.Body),
-                        HtmlBodySummary = md.Transform(s.Body.Length <= 500 ? s.Body : s.Body.Substring(0, 500)),
+                        HtmlBodySummary = md.Transform(s.Body.Length <= 500 ? s.Body : s.Body.Substring(0, 500).TrimEnd() + "...."),
                         CreatedByUserId = s.CreatedByUserId,
                         CreatedByUserName = GetUserName(s.CreatedByUser),
                         EventEndTime = (s as Event).EventEndTime,

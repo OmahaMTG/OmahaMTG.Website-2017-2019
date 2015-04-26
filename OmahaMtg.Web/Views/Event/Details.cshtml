@@ -18,7 +18,7 @@
         <div>
             <span>Start Time: @info.EventStartTime </span>
             
-            <span class="pull-right badge bg-darkCyan">
+            <span class="pull-right badge">
                 @if (!User.Identity.IsAuthenticated)
                 {
                     @Html.ActionLink("0 Members Going.  Login to RSVP", "Login", "Account", null, new { @class = "fg-white" })
@@ -26,7 +26,7 @@
                 }
                 else
                 {
-                    <a href="#" id="EventRSVP" data-event-id="@info.Id" data-currently-rsvpd='@(info.IsUserRsvpd ? "true" : "false")' class=" fg-white">@info.TotalRsvpCount Members Going.  @(info.IsUserRsvpd ? "Click To Remove RSVP" : "Click to RSVP")</a>
+                    <a href="#" id="EventRSVP" data-event-id="@info.Id" data-currently-rsvpd='@(info.IsUserRsvpd ? "true" : "false")' style="color:white">@info.TotalRsvpCount Members Going.  @(info.IsUserRsvpd ? "Click To Remove RSVP" : "Click to RSVP")</a>
                 }
             </span>
 
@@ -38,7 +38,7 @@
 <hr style="margin: 0" />
 
 <div>
-    <span class="badge badge-success">Posted by @Html.DisplayFor(modelitem => modelitem.CreatedByUserName) at @Html.DisplayFor(modelItem => modelItem.PublishStartTime)</span>
+    <span class="badge">Posted by @Html.DisplayFor(modelitem => modelitem.CreatedByUserName) at @Html.DisplayFor(modelItem => modelItem.PublishStartTime)</span>
     <div class="pull-right">
         @foreach (var group in Model.AvailableGroups.Where(w => Model.GroupTags.Contains(w.Key)))
         {

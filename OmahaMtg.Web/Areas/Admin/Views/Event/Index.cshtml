@@ -11,32 +11,32 @@
 @Html.ActionLink("New Event", "New", "Event",  new{Area = "Admin"}, new{ @class = "button small info"})
 <br/><br/>
 
-<table class="table">
+<table class="table table-striped">
     <thead>
-    <tr>
-        <td style="width: 115px;"></td>
-        <td>
-            Subject
-        </td>
-        <td>
-            Is Deleted
-        </td>
-        <td style="width: 125px;">
-            Publish Start
-        </td>
-        <td style="width: 125px;">
-            Publish End
-        </td>
-        <td style="width: 125px;">
-            Event Time
-        </td>
-        <td>
-            Group
-        </td>
-        <td>
-            Rsvp Count
-        </td>
-    </tr>
+        <tr>
+            <td style="width: 115px;"></td>
+            <td>
+                Subject
+            </td>
+            <td>
+                Is Deleted
+            </td>
+            <td style="width: 125px;">
+                Publish Start
+            </td>
+            <td style="width: 125px;">
+                Publish End
+            </td>
+            <td style="width: 125px;">
+                Event Time
+            </td>
+            <td>
+                Group
+            </td>
+            <td>
+                Rsvp Count
+            </td>
+        </tr>
     </thead>
 
     @foreach (var item in Model.Records)
@@ -44,10 +44,10 @@
         <tr>
             <td style="text-align: center">
                 <div>
-                    @Html.ActionLink("Edit", "Details", "Event", new { Area = "Admin", Id = item.Id }, new { @class = "button small info" })
-                    @Html.ActionLink("RSVPs", "download", "Event", new { Area = "Admin", eventId = item.Id }, new { @class = "button small info" })
-                    <br/><br/>
-                    @Html.ActionLink("WinnerPicker", "index", "WinnerPicker", new { Area = "Admin", eventId = item.Id }, new { @class = "button small info" })
+                    @Html.ActionLink("Edit", "Details", "Event", new { Area = "Admin", Id = item.Id }, new { @class = "btn btn-default btn-xs" })
+                    @Html.ActionLink("RSVPs", "download", "Event", new { Area = "Admin", eventId = item.Id }, new { @class = "btn btn-default btn-xs" })
+                    <br  /><br/>
+                    @Html.ActionLink("WinnerPicker", "index", "WinnerPicker", new { Area = "Admin", eventId = item.Id }, new { @class = "btn btn-default btn-xs" })
                 </div>
 
             </td>
@@ -65,11 +65,11 @@
             </td>
             <td>
                 @{
-                    var info = item as OmahaMtg.Events.EventInfo;
-                    if (info != null)
-                    {
-                        <text>@info.EventStartTime</text>
-                    }
+        var info = item as OmahaMtg.Events.EventInfo;
+        if (info != null)
+        {
+            <text>@info.EventStartTime</text>
+        }
                 }
             </td>
             <td>
@@ -93,12 +93,15 @@
 </table>
 
 
-<div class="pagination">
-    <ul>
+
+
+
+
+    <ul class="pagination">
         @if (Model.Page > 1)
         {
-            <li class="first"><a href="?page=1"><i class="icon-first-2"></i></a></li>
-            <li class="prev"><a href="?page=@(Model.Page - 1) "><i class="icon-previous"></i></a></li>
+            <li class="first"><a href="?page=1"><i class="glyphicon glyphicon-fast-backward"></i></a></li>
+            <li class="prev"><a href="?page=@(Model.Page - 1) "><i class="glyphicon glyphicon-backward"></i></a></li>
         }
 
         @for (int x = @Model.Page - 1; x <= @Model.Page; x++)
@@ -127,9 +130,8 @@
 
         @if (Model.Page < Model.TotalPages)
         {
-            <li class="next"><a href="?page=@(Model.Page + 1) "><i class="icon-next"></i></a></li>
-            <li class="last"><a href="?page=@(Model.TotalPages) "><i class="icon-last-2"></i></a></li>
+            <li class="next"><a href="?page=@(Model.Page + 1) "><i class="glyphicon glyphicon-forward"></i></a></li>
+            <li class="last"><a href="?page=@(Model.TotalPages) "><i class="glyphicon glyphicon-fast-forward"></i></a></li>
         }
 
     </ul>
-</div>

@@ -2,19 +2,15 @@
 @{
     Layout = null;
 }
-<div class="listview-outlook" data-role="listview">
-    <div class="list-group ">
-        <div class="group-content">
-            @foreach (var item in Model)
-            {
-                <a class="list " href="@string.Format("\\Post\\Details\\{0}", item.Id)">
-                    <div class="list-content">
-                        <span class="list-title">@Html.DisplayFor(modelItem => item.Title)</span>
-                        <span class="list-subtitle">@Html.DisplayFor(modelItem => item.EventStartTime)</span>
-                    </div>
-                </a>
-            }
-        </div>
-    </div>
-</div>
 
+
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            <a class="list " href="@string.Format("\\Event\\Details\\{0}", item.Id)">
+                @Html.DisplayFor(modelItem => item.Title)
+            </a>
+        </li>
+    }
+</ul>

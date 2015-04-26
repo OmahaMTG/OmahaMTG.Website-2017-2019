@@ -5,7 +5,7 @@
 
         var linkObject = $(this);
 
-        var url = "/Post/RsvpForEvent";
+        var url = "/Event/RsvpForEvent";
 
         var eventData = {
             userIsGoing: !isUserCurrentlyRsvpd,
@@ -67,7 +67,7 @@
                 console.log(data);
 
                 $("#profileUpdateMessage").fadeIn("fast", function() {
-                    $(this).delay(1000).fadeOut("slow");
+                    $(this).delay(5000).fadeOut("slow");
                 });
             },
             error: function (data) {
@@ -114,7 +114,7 @@
                 
 
                 $("#passwordUpdateMessage").fadeIn("fast", function () {
-                    $(this).delay(1000).fadeOut("slow");
+                    $(this).delay(5000).fadeOut("slow");
                 });
             },
             error: function (data) {

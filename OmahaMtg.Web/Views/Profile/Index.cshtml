@@ -6,58 +6,55 @@
 
 <div>
     <form>
-        <fieldset>
-            <div class="row">
-                <div class="col-md-6">
-                    <label>First Name</label>
-                    <div class="input-control text" data-role="input-control">
-                        <input type="text" value="@Model.FirstName" id="firstName" tabindex="1">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label>Website URL</label>
-                    <div class="input-control text" data-role="input-control">
-                        <input type="text" value="@Model.WebsiteUrl" id="webUrl" tabindex="4">
-                    </div>
-                </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" value="@Model.FirstName" id="firstName" tabindex="1">
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label>Last Name</label>
-                    <div class="input-control text" data-role="input-control">
-                        <input type="text" value="@Model.LastName" id="lastName" tabindex="2">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label>Twitter Username</label>
-                    <div class="input-control text" data-role="input-control">
-                        <input type="text" value="@Model.TwitterUser" id="twitterUser" tabindex="5">
-                    </div>
-                </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" value="@Model.LastName" id="lastName" tabindex="1">
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Email Address</label>
-                            <div class="input-control text" data-role="input-control">
-                                <input type="text" value="@Model.EmailAddress" id="emailAddress" tabindex="3">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label>Github Username</label>
-                    <div class="input-control text" data-role="input-control">
-                        <input type="text" value="@Model.GitHubUser" id="githubUser" tabindex="6">
-                    </div>
-                </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="emailAddress">Email Address</label>
+                <input type="text" class="form-control" value="@Model.EmailAddress" id="emailAddress" tabindex="1">
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="webUrl">Website URL</label>
+                <input type="text" class="form-control" value="@Model.WebsiteUrl" id="webUrl" tabindex="1">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="twitterUser">Twitter Username</label>
+                <input type="text" class="form-control" value="@Model.TwitterUser" id="twitterUser" tabindex="1">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="githubUser">Github User</label>
+                <input type="text" class="form-control" value="@Model.GitHubUser" id="githubUser" tabindex="1">
+            </div>
+        </div>
+    </div>
+
+
 
             <div class="row">
                 <div class="col-md-2">
 
-                    <input type="button" value="Submit" id="saveProfile">
+                    <input type="button" class="btn btn-default" value="Submit" id="saveProfile">
                 </div>
                 <div class="col-md-10">
 
@@ -68,35 +65,37 @@
 
             </div>
 
-        </fieldset>
+
     </form>
     <hr/>
     <form>
-            <fieldset>
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>Old Password</label>
-                        <div class="input-control text" data-role="input-control">
-                            <input type="password"  id="oldPassword">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label>New Password</label>
-                        <div class="input-control text" data-role="input-control">
-                            <input type="password" id="newPassword">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label>Confirm New Password</label>
-                        <div class="input-control text" data-role="input-control">
-                            <input type="password" id="confirmPassword">
-                        </div>
-                    </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="webUrl">Old Password</label>
+                    <input type="password" class="form-control" id="oldPassword" tabindex="1">
                 </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="twitterUser">New Password</label>
+                    <input type="password" class="form-control" id="newPassword" tabindex="1">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="githubUser">Confirm Password</label>
+                    <input type="password" class="form-control"  id="confirmPassword" tabindex="1">
+                </div>
+            </div>
+        </div>
+
+
                 <div class="row">
                     <div class="col-md-2">
 
-                        <input type="button" value="Submit" id="savePassword">
+                        <input type="button" class="btn btn-default" value="Submit" id="savePassword">
                     </div>
                     <div class="col-md-10">
 
@@ -106,60 +105,8 @@
                     </div>
 
                 </div>
-            </fieldset>
+
 
     </form>
 </div>
 
-@*<h4>ProfileInfo</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WebsiteUrl)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WebsiteUrl)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TwitterUser)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TwitterUser)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GitHubUser)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GitHubUser)
-        </dd>
-
-    </dl>*@
