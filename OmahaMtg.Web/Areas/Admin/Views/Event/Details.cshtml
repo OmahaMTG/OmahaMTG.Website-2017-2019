@@ -29,9 +29,9 @@
     <div>
         <div class="row">
             <div class="col-md-12">
-                <label>Title</label>
-                <div class="input-control text" data-role="input-control">
-                    <input type="text" value="@Model.Title" id="title" name="title" tabindex="1" style="max-width: none;">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" value="@Model.Title" id="title" name="title" tabindex="1">
                 </div>
             </div>
         </div>
@@ -46,49 +46,82 @@
 
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <label>Event Start Time<button class="button mini info" style="float: right" data-clear="eventStartTime" type='button'>Clear</button></label>
-                <div class="input-control text" data-role="input-control">
-                    <input type="text" value="@Model.EventStartTime" id="eventStartTime" name="eventStartTime" tabindex="1" style="max-width: none;">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="eventStartTime">
+                                Event Start Time
+                            </label>
+                            <button class="btn-xs btn btn-info pull-right" data-clear="eventStartTime" type='button'>Clear</button>
+                            <input type="text" class="form-control" value="@Model.EventStartTime" id="eventStartTime" name="eventStartTime">
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="eventEndTime">
+                                Event End Time
+                            </label>
+                            <button class="btn-xs btn btn-info pull-right" data-clear="eventEndTime" type='button'>Clear</button>
+                            <input type="text" class="form-control" value="@Model.EventEndTime" id="eventEndTime" name="eventEndTime">
+                        </div>
+                    </div>
 
                 </div>
-            </div>
-            <div class="col-md-6">
-                <label>Event End Time<button class="button mini info" style="float: right" data-clear="eventEndTime" type='button'>Clear</button></label>
-                <div class="input-control text" data-role="input-control">
-                    <input type="text" value="@Model.EventEndTime" i id="eventEndTime" name="eventEndTime" tabindex="1" style="max-width: none;">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="publishStartTime">
+                                Publish Start Time
+                            </label>
+                            <button class="btn-xs btn btn-info pull-right" data-clear="publishStartTime" type='button'>Clear</button>
+                            <input type="text" class="form-control" value="@Model.PublishStartTime" id="publishStartTime" name="publishStartTime">
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="publishEndTime">
+                                Publish End Time
+                            </label>
+                            <button class="btn-xs btn btn-info pull-right" data-clear="publishEndTime" type='button'>Clear</button>
+                            <input type="text" class="form-control" value="@Model.PublishEndTime" id="publishEndTime" name="publishEndTime">
+                        </div>
+                    </div>
 
                 </div>
-            </div>
-        </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="vimeoId">
+                                Vimeo ID
+                            </label>
+                            <input type="text" class="form-control" value="@Model.VimeoId" id="vimeoId" name="vimeoId">
+                        </div>
 
-        <div class="row">
-            <div class="col-md-6">
-                <label>Publish Start Time<button class="button mini info" style="float: right" data-clear="publishStartTime" type='button'>Clear</button></label>
-                <div class="input-control text" data-role="input-control">
-                    <input type="text" value="@Model.PublishStartTime" id="publishStartTime" name="publishStartTime" tabindex="1" style="max-width: none;">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="" data-role="input-control">
+                            <label>
+                                @if (Model.IsDeleted)
+                                {
+                                    <input type="checkbox" name="isDeleted" checked="" value="true">
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="isDeleted" value="true">
+                                }
+                                Deleted
+                            </label>
+                        </div>
+                    </div>
 
                 </div>
-            </div>
-            <div class="col-md-6">
-                <label>Publish End Time<button class="button mini info" style="float: right" data-clear="publishEndTime" type='button'>Clear</button></label>
-                <div class="input-control text" data-role="input-control">
-                    <input type="text" value="@Model.PublishEndTime" id="publishEndTime" name="publishEndTime" tabindex="1" style="max-width: none;">
 
-                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <label>Vimeo Id</label>
-                <div class="input-control text" data-role="input-control">
-                    <input type="text" value="@Model.VimeoId" id="vimeoId" name="vimeoId" tabindex="1" style="max-width: none;">
-
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <ul>
                     @foreach (var item in Model.AvailableGroups)
                     {
@@ -111,30 +144,18 @@
 
                 </ul>
             </div>
-            <div class="col-md-6">
-                
-                        <div class="" data-role="input-control">
-                            <label>
-                                @if (Model.IsDeleted)
-                                {
-                                    <input type="checkbox" name="isDeleted" checked="" value="true">
-                                }
-                                else
-                                {
-                                    <input type="checkbox" name="isDeleted" value="true">
-                                }
-                                Deleted
-                            </label>
-                        </div>
 
-            </div>
         </div>
 
-        <br/><br/>
+
         <div class="row">
-            <div class="col-md-6"> </div>
-            <div class="col-md-6" style="text-align: right">
-                <button class="button primary" type="submit">Save</button> &nbsp; &nbsp;
+            <div class="col-md-12">
+                <div class="pull-right">
+
+                    <a href="../" class="btn-sm btn btn-primary">Return to Event List</a> &nbsp; &nbsp;
+                    <button class="btn-sm btn btn-primary" type="submit">Save</button>
+                </div>
+                
             </div>
         </div>
 

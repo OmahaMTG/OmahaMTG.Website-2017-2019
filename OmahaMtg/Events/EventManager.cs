@@ -21,12 +21,12 @@ namespace OmahaMtg.Events
         public static Dictionary<int, string> AvailableGroups;
 
 
-        public PagedSet<EventInfo> GetEvents(int skip, int take, bool includeExpired, bool includeRsvpCount)
+        public PagedSet<EventInfo> GetEvents(int skip, int take, bool includeExpired, bool includeRsvpCount, bool includeDeleted)
         {
             var posts = _context.Events
-                .Where(w=> w.PublishStartTime <= DateTime.Now || w.PublishStartTime == null)
+                .Where(w => w.PublishStartTime <= DateTime.Now || w.PublishStartTime == null || includeExpired)
                 .Where(w => w.PublishEndTime >= DateTime.Now || w.PublishEndTime == null || includeExpired)
-                .Where(w => !w.IsDeleted)
+                .Where(w => includeDeleted || !w.IsDeleted)
                 .OrderByDescending(o => o.PublishStartTime)
                 .Include(cbu => cbu.CreatedByUser)
                 .Include(g => g.Groups)
@@ -234,7 +234,6 @@ namespace OmahaMtg.Events
         {
             return AvailableGroups;
         }
-
 
     }
 }

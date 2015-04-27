@@ -7,7 +7,6 @@
 /// <reference path="respond.js" />
 /// <reference path="respond.matchmedia.addlistener.js" />
 /// <reference path="site.js" />
-/// <reference path="marked.min.js" />
 /// <reference path="anytime.5.0.5.min.js" />
 /// <reference path="jquery.widget.min.js" />
 /// <reference path="jquery.textillate.js" />

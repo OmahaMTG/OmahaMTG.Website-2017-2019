@@ -9,7 +9,8 @@ namespace OmahaMtg.Events
 {
     public interface IEventManager
     {
-        PagedSet<EventInfo> GetEvents(int skip, int take, bool includeExpired, bool includeRsvpCount);
+        PagedSet<EventInfo> GetEvents(int skip, int take, bool includeExpired, bool includeRsvpCount, bool includeDeleted);
+
         EventInfo GetEvent(int eventId, Guid userId);
         EventInfo GetEvent(int eventId);
         RsvpInfo UpdateRsvp(Guid userId, int eventId, bool isUserGoing);
