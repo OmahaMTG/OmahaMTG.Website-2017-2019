@@ -75,40 +75,37 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
             };
             message.To.Add(SiteEmail);
 
+            int count = 0;
+
             if (!model.SendAsTest)
             {
                 foreach (var group in model.RecipientGroups)
                 {
-                    foreach (var email in _gm.GetUserEmailsInGroup(group))
+                    var emails = _gm.GetUserEmailsInGroup(group);
+
+                    var emailTasks = emails.Select(to =>
                     {
-                        message.Bcc.Add(email);
-                    }
+                        count++;
+                        message.To.Clear();
+                        message.To.Add(to);
+                        return emailer.SendEmailAsync(message);
+                    });
+
+                    await Task.WhenAll(emailTasks);
                 }
+                return Json(count);
             }
             else
             {
-                message.Bcc.Add(model.FromEmail);
-            }
-
-
-            try
-            {
+                message.To.Clear();
+                message.To.Add(model.FromEmail);
                 await emailer.SendEmailAsync(message);
-                return Json(message.Bcc.Count);
-            }
-            catch (Exception ex)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                Dictionary<string, object> error = new Dictionary<string, object>();
-                error.Add("ErrorCode", -1);
-                error.Add("ErrorMessage", ex.Message);
-                return Json(error);
-            }
 
 
-            
+                return Json(1);
+            }
+ 
         }
 
-       
     }
 }

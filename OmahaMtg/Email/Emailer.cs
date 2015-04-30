@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using SendGrid;
@@ -34,53 +35,29 @@ namespace OmahaMtg.Email
             }
         }
 
-        public Task SendEmailAsync(EmailInfo emailInfo)
+        public async Task SendEmailAsync(EmailInfo emailInfo)
         {
-            var myMessage = new SendGridMessage();
-
             if (emailInfo.From == null)
                 emailInfo.From = SiteEmail;
 
-            // Add the message properties.
+            var myMessage =
+                new MailMessage();
+
+            myMessage.Body = emailInfo.HtmlBody;
+            myMessage.Subject = emailInfo.Subject;
+            myMessage.IsBodyHtml = true;
             myMessage.From = new MailAddress(emailInfo.From);
 
-            myMessage.AddTo(emailInfo.From);
-            
-            foreach (var address in emailInfo.Bcc)
+            foreach (var address in emailInfo.To)
             {
-                myMessage.AddBcc(address);
+                myMessage.To.Add(new MailAddress(address));
             }
 
-            myMessage.Subject = emailInfo.Subject;
-
-            //Add the HTML and Text bodies
-            if(!string.IsNullOrEmpty(emailInfo.TextBody))
-                myMessage.Text = emailInfo.TextBody;
-
-            if (!string.IsNullOrEmpty(emailInfo.HtmlBody))
-                myMessage.Html = emailInfo.HtmlBody;
-
-            var credentials = new NetworkCredential(EmailUserName, EmailPassword);
-
-            // Create an Web transport for sending email.
-            var transportWeb = new Web(credentials);
-
-            // Send the email.
-            return CheckForExceptionAsync(transportWeb.DeliverAsync(myMessage));
-        }
-
-        private async Task CheckForExceptionAsync(Task source)
-        {
-            try
+            using (var client = new SmtpClient()) // SmtpClient configuration comes from config file
             {
-                await source;
-            }
-            catch (Exception ex)
-            {
-               // HandleException(ex);
-                //default(T);
+                await client.SendMailAsync(myMessage);
+
             }
         }
-
     }
 }
