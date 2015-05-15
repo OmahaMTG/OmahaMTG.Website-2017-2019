@@ -21,7 +21,7 @@
             <span class="pull-right badge">
                 @if (!User.Identity.IsAuthenticated)
                 {
-                    @Html.ActionLink("0 Members Going.  Login to RSVP", "Login", "Account", null, new { @class = "fg-white" })
+                    @Html.ActionLink("Login to RSVP", "Login", "Account", null, new { @style = "color:white" })
 
                 }
                 else

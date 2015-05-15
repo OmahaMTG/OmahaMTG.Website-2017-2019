@@ -186,7 +186,7 @@ namespace OmahaMtg.Events
 
         public IEnumerable<EventInfo> GetLatestEventsWithVideos(int numberToGet)
         {
-            var events = _context.Events.Where(w => w.VimeoId > 0).OrderBy(o => o.EventStartTime).Take(numberToGet);
+            var events = _context.Events.Where(w => w.VimeoId > 0).OrderByDescending(o => o.EventStartTime).Take(numberToGet);
             return MapEventToEventInfo(events);
         }
 

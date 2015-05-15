@@ -271,6 +271,8 @@
     <None Include="newrelic\newrelic.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\omahamtg.com - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\omahamtg.com - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="newrelic\NewRelic.Profiler.dll" />
     <Content Include="Scripts\anytime.5.0.5.min.js" />
@@ -295,7 +297,9 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
