@@ -48,7 +48,7 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
             model.AvailableGroups = _pm.GetAvailableGroups();
             model.RecipientGroups = new List<int>();
 
-            var userId = new Guid(User.Identity.GetUserId());
+            
             model.FromEmail = SiteEmail;
             model.SendAsTest = true;
             //if (eventId.HasValue)
@@ -97,8 +97,9 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
             }
             else
             {
+                var userId = new Guid(User.Identity.GetUserId());
                 message.To.Clear();
-                message.To.Add(model.FromEmail);
+                message.To.Add(_profileManager.GetUserProfile(userId).Email);
                 await emailer.SendEmailAsync(message);
 
 
