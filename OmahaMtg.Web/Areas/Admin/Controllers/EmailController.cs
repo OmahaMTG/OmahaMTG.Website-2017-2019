@@ -49,7 +49,7 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
             model.RecipientGroups = new List<int>();
 
             var userId = new Guid(User.Identity.GetUserId());
-            model.FromEmail = _profileManager.GetUserProfile(userId).Email;
+            model.FromEmail = SiteEmail;
             model.SendAsTest = true;
             //if (eventId.HasValue)
             //{

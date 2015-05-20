@@ -26,6 +26,8 @@ namespace OmahaMtg.Web
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/marked").Include(
+                        "~/Scripts/markdown.js",
+                        "~/Scripts/to-markdown.js",
                         "~/Scripts/bootstrap-markdown.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/anytimejs").Include(

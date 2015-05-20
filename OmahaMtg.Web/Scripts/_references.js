@@ -12,3 +12,5 @@
 /// <reference path="jquery.textillate.js" />
 /// <reference path="jquery.lettering.js" />
 /// <reference path="bootstrap-markdown.js" />
+/// <reference path="to-markdown.js" />
+/// <reference path="markdown.js" />
