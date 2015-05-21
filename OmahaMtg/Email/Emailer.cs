@@ -55,7 +55,17 @@ namespace OmahaMtg.Email
 
             using (var client = new SmtpClient()) // SmtpClient configuration comes from config file
             {
-                await client.SendMailAsync(myMessage);
+                OmahaMtg.Log.Logging.Information("Sending Email: {@MailMessage}", myMessage);
+
+                try
+                {
+                    await client.SendMailAsync(myMessage);
+                }
+                catch (Exception ex)
+                {
+                     OmahaMtg.Log.Logging.Error(ex, "Error Sending Email");
+                }
+                
 
             }
         }

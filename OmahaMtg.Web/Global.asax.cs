@@ -18,6 +18,8 @@ namespace OmahaMtg.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            OmahaMtg.Log.Logging.Setup();
         }
     }
 }
