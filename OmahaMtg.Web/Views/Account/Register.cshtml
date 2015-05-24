@@ -44,11 +44,31 @@
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
+    <div class="row">
+        <div class="col-md-12">
+            <p>Never miss an Event!  Select the groups you are interested in recieving emails on upcoming event.</p>
+            <ul>
+
+                @foreach (var item in Model.AvailableGroups)
+                {
+                    <div class="" data-role="input-control">
+                        <label>
+                                <input type="checkbox"  name="UsersGroups" id="UsersGroups" value="@item.Key">
+                                @item.Value
+                        </label>
+                    </div>
+                }
+
+            </ul>
         </div>
     </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Register"/>
+        </div>
+    </div>
+    
 }
 
 @section Scripts {

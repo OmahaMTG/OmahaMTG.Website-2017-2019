@@ -29,6 +29,9 @@ namespace OmahaMtg.Web.Controllers
             model.GitHubUser = profile.GitHubUser;
             model.WebsiteUrl = profile.WebsiteUrl;
             model.TwitterUser = profile.TwitterUser;
+
+            model.AvailableGroups = profile.AvailableGroups;
+            model.UsersGroups = profile.UsersGroups.ToList();
             
             return View(model);
         }
@@ -45,7 +48,7 @@ namespace OmahaMtg.Web.Controllers
                 GitHubUser = user.GitHubUser,
                 TwitterUser = user.TwitterUser,
                 WebsiteUrl = user.WebsiteUrl,
-                Email = user.EmailAddress
+                Email = user.EmailAddress, UsersGroups = user.UsersGroups
             });
 
             return Json(true);

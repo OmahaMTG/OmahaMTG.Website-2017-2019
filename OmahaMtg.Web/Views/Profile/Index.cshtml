@@ -28,26 +28,56 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="webUrl">Website URL</label>
-                <input type="text" class="form-control" value="@Model.WebsiteUrl" id="webUrl" tabindex="1">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="webUrl">Website URL</label>
+                    <input type="text" class="form-control" value="@Model.WebsiteUrl" id="webUrl" tabindex="1">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="twitterUser">Twitter Username</label>
+                    <input type="text" class="form-control" value="@Model.TwitterUser" id="twitterUser" tabindex="1">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="githubUser">Github User</label>
+                    <input type="text" class="form-control" value="@Model.GitHubUser" id="githubUser" tabindex="1">
+                </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="twitterUser">Twitter Username</label>
-                <input type="text" class="form-control" value="@Model.TwitterUser" id="twitterUser" tabindex="1">
+
+        <div class="row">
+            <div class="col-md-12">
+                <p>Never miss an Event!  Select the groups you are interested in recieving emails on upcoming event.</p>
+                <ul>
+                   
+                    @foreach (var item in Model.AvailableGroups)
+                    {
+                        <div class="" data-role="input-control">
+                            <label>
+                                @if (Model.UsersGroups.Contains(item.Key))
+                                {
+                                    <input type="checkbox" checked="" name="UsersGroups" id="UsersGroups" value="@item.Key">
+                                    @item.Value
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="UsersGroups" id="UsersGroups" value="@item.Key">
+                                    @item.Value
+                                }
+                            </label>
+                        </div>
+                    }
+
+                </ul>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="githubUser">Github User</label>
-                <input type="text" class="form-control" value="@Model.GitHubUser" id="githubUser" tabindex="1">
-            </div>
-        </div>
-    </div>
+
+
+
 
 
 
@@ -58,15 +88,15 @@
                 </div>
                 <div class="col-md-10">
 
-                    <div class="span4 bg-red text-center" id="profileUpdateMessage" style =" display: none">
-                        <div class="fg-white" >Profile Updated</div>
+                    <div class="span4 bg-red text-center" id="profileUpdateMessage" style=" display: none">
+                        <div class="fg-white">Profile Updated</div>
                     </div>
                 </div>
 
             </div>
 
 
-    </form>
+</form>
     <hr/>
     <form>
 

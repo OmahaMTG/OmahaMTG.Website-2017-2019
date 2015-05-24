@@ -15,5 +15,8 @@ namespace OmahaMtg.Profile
         Tuple<bool, string> UpdatePassword(Guid userId, string currentPassword, string newPassword);
         void UpdateEmail(Guid userId, string email);
         void ConfirmUpdatedEmail(Guid userId, Guid newEmailId);
+        Dictionary<int, string> GetGroups();
+        void UpdateGroupMembership(Guid userId, List<int> groupIds);
+
     }
 }

@@ -45,13 +45,19 @@
         
         var url = "/Profile/UpdateProfile";
 
+        var selectedGroups = [];
+        $('#UsersGroups:checked').each(function () {
+            selectedGroups.push($(this).val());
+        });
+
         var eventData = {
             firstName: $("#firstName").val(),
             lastName: $("#lastName").val(),
             websiteUrl : $("#webUrl").val(),
             twitterUser : $("#twitterUser").val(),
             gitHubUser: $("#githubUser").val(),
-            emailAddress: $("#emailAddress").val()
+            emailAddress: $("#emailAddress").val(),
+            usersGroups: selectedGroups
         };
 
         console.log(eventData);

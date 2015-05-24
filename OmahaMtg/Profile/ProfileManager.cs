@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security.Provider;
 using OmahaMtg.Data;
 
 namespace OmahaMtg.Profile
@@ -13,14 +14,31 @@ namespace OmahaMtg.Profile
     public class ProfileManager : IProfileManager
     {
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _dbContext;
         public ProfileManager()
         {
-            _userManager = new ApplicationUserManager(new UserStore<User, Role, Guid, UserLogin, UserRole, UserClaim>(new ApplicationDbContext()));
+            _dbContext = new ApplicationDbContext();
+            _userManager = new ApplicationUserManager(new UserStore<User, Role, Guid, UserLogin, UserRole, UserClaim>(_dbContext));
         }
 
         public ProfileInfo GetUserProfile(Guid userId)
         {
-            return MapUserToProfileInfo(GetUser(userId));
+            var profile = MapUserToProfileInfo(GetUser(userId));
+            profile.AvailableGroups = GetGroups();
+            profile.UsersGroups = GetUsersGroups(userId).ToList();
+
+            return profile;
+        }
+
+        public Dictionary<int, string> GetGroups()
+        {
+            return _dbContext.Groups.ToDictionary(s => s.Id, s => s.Name);
+
+        }
+
+        public IEnumerable<int> GetUsersGroups(Guid userId)
+        {
+            return _dbContext.Users.FirstOrDefault(u => u.Id == userId).Groups.Select(s => s.Id);
         }
 
         public void UpdateProfile(Guid userId, ProfileInfo profile)
@@ -34,6 +52,25 @@ namespace OmahaMtg.Profile
             user.TwitterUser = profile.TwitterUser;
             user.Email = profile.Email;
             _userManager.Update(user);
+            UpdateGroupMembership(userId, profile.UsersGroups.ToList());
+        }
+
+        public void UpdateGroupMembership(Guid userId, List<int> groupIds)
+        {
+            var updateUser = _dbContext.Users.Include("Groups").FirstOrDefault(w => w.Id == userId);
+
+            var groups = _dbContext.Groups.ToList();
+            
+            if (updateUser == null)
+                return;
+
+            updateUser.Groups.Clear();
+            foreach (var id in groupIds)
+            {
+                updateUser.Groups.Add(groups.FirstOrDefault(w => w.Id == id));
+            }
+
+            _dbContext.SaveChanges();
         }
 
 

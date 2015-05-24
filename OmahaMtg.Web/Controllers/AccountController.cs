@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using OmahaMtg.Data;
+using OmahaMtg.Profile;
 using OmahaMtg.Web.Models;
 
 namespace OmahaMtg.Web.Controllers
@@ -150,7 +151,13 @@ namespace OmahaMtg.Web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+
+            OmahaMtg.Profile.IProfileManager pm = new OmahaMtg.Profile.ProfileManager();
+            var vm = new RegisterViewModel();
+
+            vm.AvailableGroups = pm.GetGroups();
+
+            return View(vm);
         }
 
         //
@@ -164,6 +171,8 @@ namespace OmahaMtg.Web.Controllers
             {
                 var user = new User { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Id = System.Guid.NewGuid()};
                 var result = await UserManager.CreateAsync(user, model.Password);
+                var profileManager = new ProfileManager();
+                profileManager.UpdateGroupMembership(user.Id, model.UsersGroups.ToList());
                 if (result.Succeeded)
                 {
 

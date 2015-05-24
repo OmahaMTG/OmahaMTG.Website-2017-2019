@@ -14,5 +14,8 @@ namespace OmahaMtg.Profile
         public string WebsiteUrl { get; set; }
         public string TwitterUser { get; set; }
         public string GitHubUser { get; set; }
+
+        public Dictionary<int, string> AvailableGroups { get; set; }
+        public IEnumerable<int> UsersGroups { get; set; } 
     }
 }

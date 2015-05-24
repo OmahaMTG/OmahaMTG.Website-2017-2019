@@ -86,6 +86,9 @@ namespace OmahaMtg.Web.Models
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        public Dictionary<int, string> AvailableGroups { get; set; }
+        public IEnumerable<int> UsersGroups { get; set; } 
     }
 
     public class ResetPasswordViewModel
