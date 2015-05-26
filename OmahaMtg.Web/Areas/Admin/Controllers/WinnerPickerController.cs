@@ -14,11 +14,36 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
             return View(eventId);
         }
 
+        private List<Guid> Winners()
+        {
+            object o = Session["winners"];
+            if (o is List<Guid>)
+            {
+                return (List<Guid>)o;
+            }
+
+            return new List<Guid>();
+        }
+
+        private void Set (Guid winner)
+        {
+            var winners = Winners();
+            winners.Add(winner);
+            Session["winners"] = winners;
+        }
+
+
+
         [AllowAnonymous]
-        public JsonResult GetWinner(int eventId, int numberOfWinnersToGet)
+        public JsonResult GetWinner(int eventId)
         {
             WinnerPicker.WinnerPicker winnerPicker = new WinnerPicker.WinnerPicker();
-            return Json(winnerPicker.GetWinners(eventId, numberOfWinnersToGet), JsonRequestBehavior.AllowGet);
+
+            var winner = winnerPicker.GetWinner(eventId, Winners());
+
+            Set(winner.Key);
+
+            return Json(winner.Value, JsonRequestBehavior.AllowGet);
         }
     }
 }
