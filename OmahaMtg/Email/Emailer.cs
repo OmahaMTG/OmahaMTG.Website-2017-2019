@@ -43,7 +43,7 @@ namespace OmahaMtg.Email
             var myMessage =
                 new MailMessage();
 
-            myMessage.Body = emailInfo.HtmlBody;
+            myMessage.Body = emailInfo.HtmlBody ?? emailInfo.TextBody;
             myMessage.Subject = emailInfo.Subject;
             myMessage.IsBodyHtml = true;
             myMessage.From = new MailAddress(emailInfo.From);
