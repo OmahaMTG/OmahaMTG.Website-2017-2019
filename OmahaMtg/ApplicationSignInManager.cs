@@ -45,8 +45,9 @@ namespace OmahaMtg
             if (result != SignInStatus.Failure)
                 return result;
 
-            //if they did not succede in logging in, try them using the membership way - if they succede at that way, go ahead and convert thier password to the new way.  
-            if (user.PasswordHash == EncodePassword(password, user.SecurityStamp))
+            //if they did not succede in logging in, try them using the membership way - if they succede at that way, go ahead and convert thier password to the new way.
+            Guid securityStamp;
+            if (!Guid.TryParse(user.SecurityStamp, out securityStamp) && user.PasswordHash == EncodePassword(password, user.SecurityStamp))
             {
                 await UserManager.RemovePasswordAsync(user.Id);
                 var token = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
