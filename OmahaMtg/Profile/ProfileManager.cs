@@ -19,6 +19,12 @@ namespace OmahaMtg.Profile
         {
             _dbContext = new ApplicationDbContext();
             _userManager = new ApplicationUserManager(new UserStore<User, Role, Guid, UserLogin, UserRole, UserClaim>(_dbContext));
+
+            _userManager.UserValidator = new UserValidator<User, Guid>(_userManager)
+            {
+                AllowOnlyAlphanumericUserNames = false,
+                RequireUniqueEmail = true
+            };
         }
 
         public ProfileInfo GetUserProfile(Guid userId)

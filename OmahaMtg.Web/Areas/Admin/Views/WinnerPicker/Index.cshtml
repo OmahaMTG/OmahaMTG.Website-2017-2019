@@ -37,6 +37,8 @@
         }
         $("#getWinner").click(function() {
 
+            $.ajaxSetup({ cache: false });
+
                 var url = "/Admin/WinnerPicker/GetWinner";
                 var requestData = {
                     numberOfWinnersToGet: 1,

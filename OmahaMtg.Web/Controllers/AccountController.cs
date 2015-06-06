@@ -23,7 +23,11 @@ namespace OmahaMtg.Web.Controllers
 
         public AccountController()
         {
-            
+            UserManager.UserValidator = new UserValidator<User, Guid>(UserManager)
+            {
+                AllowOnlyAlphanumericUserNames = false,
+                RequireUniqueEmail = true
+            };
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
