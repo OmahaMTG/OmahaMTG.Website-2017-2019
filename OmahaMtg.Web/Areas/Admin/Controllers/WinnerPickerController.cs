@@ -45,5 +45,15 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
 
             return Json(winner.Value, JsonRequestBehavior.AllowGet);
         }
+
+        [AllowAnonymous]
+        public JsonResult GetRsvps(int eventId)
+        {
+            WinnerPicker.WinnerPicker winnerPicker = new WinnerPicker.WinnerPicker();
+
+            var winner = winnerPicker.GetAllRsvpUsers(eventId);
+
+            return Json(winner, JsonRequestBehavior.AllowGet);
+        }
     }
 }

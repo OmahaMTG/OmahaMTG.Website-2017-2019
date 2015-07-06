@@ -271,9 +271,9 @@ namespace OmahaMtg.Web.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public ActionResult ResetPassword(string code, Guid userId)
         {
-            return code == null ? View("Error") : View();
+            return code == null || userId == Guid.Empty ? View("Error") : View();
         }
 
         //
@@ -287,11 +287,11 @@ namespace OmahaMtg.Web.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByIdAsync(model.UserId);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return View("Error");
             }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)

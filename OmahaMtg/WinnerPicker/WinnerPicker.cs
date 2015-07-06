@@ -41,6 +41,17 @@ namespace OmahaMtg.WinnerPicker
 
 
             return results;
-        } 
+        }
+
+        public List<string> GetAllRsvpUsers(int eventId)
+        {
+            var rsvpUsers = _context.Rsvps.Where(w => w.EventId == eventId)
+                .Include(r => r.User);//.Select(s => s.User.FirstName + " " + s.User.LastName);
+
+
+            var results = rsvpUsers.Select(s => s.User.FirstName + " " + s.User.LastName);
+
+            return results.ToList();
+        }
     }
 }
