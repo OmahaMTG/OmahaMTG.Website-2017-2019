@@ -10,8 +10,10 @@ using OmahaMtg.Events.Report;
 
 namespace OmahaMtg.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class EventController : Controller
     {
+
         private OmahaMtg.Events.IEventManager _pm;
         public EventController()
         {

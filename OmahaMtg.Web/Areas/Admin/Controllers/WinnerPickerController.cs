@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace OmahaMtg.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class WinnerPickerController : Controller
     {
         // GET: Admin/WinnerPicker
@@ -32,9 +33,6 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
             Session["winners"] = winners;
         }
 
-
-
-        [AllowAnonymous]
         public JsonResult GetWinner(int eventId)
         {
             WinnerPicker.WinnerPicker winnerPicker = new WinnerPicker.WinnerPicker();

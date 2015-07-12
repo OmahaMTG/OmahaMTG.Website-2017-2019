@@ -19,6 +19,7 @@ using ModelBinderAttribute = System.Web.Http.ModelBinding.ModelBinderAttribute;
 
 namespace OmahaMtg.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class EmailController : Controller
     {
         private IEventManager _pm;
