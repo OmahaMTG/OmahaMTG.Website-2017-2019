@@ -18,10 +18,10 @@
         <div>
             <span>Start Time: @info.EventStartTime </span>
             
-            <span class="pull-right badge">
+            <span class="pull-right badge" style="background-color: #d43f3a">
                 @if (!User.Identity.IsAuthenticated)
                 {
-                    @Html.ActionLink("Login to RSVP", "Login", "Account", null, new { @style = "color:white" })
+                    @Html.ActionLink("Login to RSVP", "Login", "Account", new {returnUrl = String.Format("/Event/Details/{0}", Model.Id )}, new { @style = "color:white" })
 
                 }
                 else
