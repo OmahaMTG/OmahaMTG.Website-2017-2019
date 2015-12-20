@@ -1,0 +1,10 @@
+﻿@model OmahaMtg.Web.Models.RandomBannerAddModel
+@{
+    Layout = null;
+}
+
+@if (Model.HasBannerAdd)
+{
+    <a href="@Model.Url" title="@Model.Name" id="sponsor-banner-add-link">
+        <img src="@Model.BannerAddUrl"></a>
+}

@@ -16,18 +16,26 @@ namespace OmahaMtg.Web.Controllers
         //    return Index(1);
         //}
 
-        public ActionResult Index(int page =1)
+        public ActionResult Index(int page = 1)
         {
             OmahaMtg.Events.IEventManager pm = new EventManager();
 
             int skipCount = 0;
 
-            skipCount = (page - 1)*10;
+            skipCount = (page - 1) * 10;
 
 
             return View(pm.GetEvents(skipCount, 10, false, false, false));
         }
 
-        
+        /// <summary>
+        /// Controller to return a random banner add.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RandomBannerAdd()
+        {
+            Models.RandomBannerAddModel model = new Models.RandomBannerAddModel();
+            return View(model);
+        }
     }
 }

@@ -39,7 +39,12 @@ namespace OmahaMtg.Data
         public System.Data.Entity.DbSet<Rsvp> Rsvps { get; set; }
         public System.Data.Entity.DbSet<Event> Events { get; set; }
         public System.Data.Entity.DbSet<Group> Groups { get; set; }
-
-
+        /// <summary>
+        /// Gets or sets the banner adds.
+        /// </summary>
+        /// <value>
+        /// The banner adds.
+        /// </value>
+        public System.Data.Entity.DbSet<BannerAdd> BannerAdds { get; set; }
     }
 }
