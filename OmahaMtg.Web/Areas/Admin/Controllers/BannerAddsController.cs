@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace OmahaMtg.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class BannerAddsController : Controller
     {
         #region Fields
