@@ -24,7 +24,17 @@ textarea {
   resize: vertical; 
 }*/
 
-
+/*Banner Adds*/
+#sponsor-banner-add-link img {
+    width: 100%;
+}
+/*End Banner Adds*/
+/*Admin/BannerAdds*/
+.banner-add-admin-list {
+    max-width:200px;
+    max-height:100px;
+}
+/*End Admin/BannerAdds*/
 .navbar {
       width: 100%;
   display: block;

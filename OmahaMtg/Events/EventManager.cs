@@ -17,7 +17,6 @@ namespace OmahaMtg.Events
             _context = new ApplicationDbContext();
             AvailableGroups = _context.Groups.ToDictionary(g => g.Id, g => g.Name); 
         }
-
         public static Dictionary<int, string> AvailableGroups;
 
 

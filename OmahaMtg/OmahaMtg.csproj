@@ -109,7 +109,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BannerAdds\BannerAddManager.cs" />
+    <Compile Include="BannerAdds\BannerAdds.cs" />
+    <Compile Include="BannerAdds\IBannerAddManager.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
+    <Compile Include="Data\BannerAdd.cs" />
     <Compile Include="Data\Event.cs" />
     <Compile Include="Data\Group.cs" />
     <Compile Include="Data\IdentityModels.cs" />
@@ -129,6 +133,10 @@
     <Compile Include="Migrations\201504250046545_InitialMigration.cs" />
     <Compile Include="Migrations\201504250046545_InitialMigration.Designer.cs">
       <DependentUpon>201504250046545_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512080135255_AddBannerAdd.cs" />
+    <Compile Include="Migrations\201512080135255_AddBannerAdd.Designer.cs">
+      <DependentUpon>201512080135255_AddBannerAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PagedSet.cs" />
@@ -151,11 +159,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\README.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201504250046545_InitialMigration.resx">
       <DependentUpon>201504250046545_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512080135255_AddBannerAdd.resx">
+      <DependentUpon>201512080135255_AddBannerAdd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

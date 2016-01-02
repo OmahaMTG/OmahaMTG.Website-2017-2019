@@ -20,6 +20,9 @@ namespace OmahaMtg.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             OmahaMtg.Log.Logging.Setup();
+
+            //Make sure banner images are in the correct place.
+            App_Start.BannerConfig.EnsureBannerImages();
         }
     }
 }
