@@ -143,7 +143,7 @@ namespace OmahaMtg.BannerAdds
         public BannerAdd GetRandomActiveBannerAdd()
         {
             BannerAdds adds = GetActiveBannerAdds();
-            if (adds == null)
+            if (adds.Count == 0)
                 return null;
             int randomIndex = new Random().Next(adds.Count);
             return adds[randomIndex];

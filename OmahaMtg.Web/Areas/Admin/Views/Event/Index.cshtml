@@ -48,6 +48,8 @@
                     @Html.ActionLink("RSVPs", "download", "Event", new { Area = "Admin", eventId = item.Id }, new { @class = "btn btn-default btn-xs" })
                     <br  /><br/>
                     @Html.ActionLink("WinnerPicker", "index", "WinnerPicker", new { Area = "Admin", eventId = item.Id }, new { @class = "btn btn-default btn-xs" })
+                    <br /><br />
+                    <a href="http://omahamtg.github.io/superwinnerpicker_ts/?eventid=@item.Id" class="btn btn-default btn-xs" > Super Winner Picker</a>
                 </div>
 
             </td>

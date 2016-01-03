@@ -9,7 +9,7 @@ namespace OmahaMtg.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(OmahaMtg.Data.ApplicationDbContext context)
