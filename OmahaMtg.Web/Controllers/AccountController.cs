@@ -191,6 +191,8 @@ namespace OmahaMtg.Web.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+                OmahaMtg.Profile.IProfileManager pm = new OmahaMtg.Profile.ProfileManager();
+                model.AvailableGroups = pm.GetGroups();
                 AddErrors(result);
             }
 
