@@ -9,6 +9,7 @@ namespace OmahaMtg.Web
         public void Configuration(IAppBuilder app)
         {
             new OmahaMtg.Startup.Startup().ConfigureAuth(app);
+            OmahaMtg.Log.Logging.Setup();
         }
     }
 }
