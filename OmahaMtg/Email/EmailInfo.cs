@@ -22,6 +22,7 @@ namespace OmahaMtg.Email
         public string HtmlBody { get; set; }
         public List<string> To { get; set; }
         public string From { get; set; }
+        public string FromName { get; set; }
         public List<string> Bcc { get; set; }
     }
 }

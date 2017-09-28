@@ -46,7 +46,7 @@ namespace OmahaMtg.Email
             myMessage.Body = emailInfo.HtmlBody ?? emailInfo.TextBody;
             myMessage.Subject = emailInfo.Subject;
             myMessage.IsBodyHtml = true;
-            myMessage.From = new MailAddress(emailInfo.From);
+            myMessage.From = new MailAddress(emailInfo.From, emailInfo.FromName);
 
             foreach (var address in emailInfo.To)
             {

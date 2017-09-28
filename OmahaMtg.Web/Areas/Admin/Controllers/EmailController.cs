@@ -70,6 +70,7 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
             var message = new EmailInfo()
             {
                 From = model.FromEmail,
+                FromName = model.FromName,
                 Subject = model.Subject,
                 HtmlBody = MarkdownService.GetHtmlFromMarkdown(model.Body),
                
