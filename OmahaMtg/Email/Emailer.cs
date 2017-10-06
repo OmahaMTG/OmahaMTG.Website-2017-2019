@@ -27,13 +27,7 @@ namespace OmahaMtg.Email
             }
         }
 
-        public string SiteEmail
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["siteEmail"];
-            }
-        }
+        public string SiteEmail => ConfigurationManager.AppSettings["siteEmail"];
 
         public async Task SendEmailAsync(EmailInfo emailInfo)
         {
@@ -65,8 +59,6 @@ namespace OmahaMtg.Email
                 {
                      OmahaMtg.Log.Logging.Error(ex, "Error Sending Email");
                 }
-                
-
             }
         }
     }

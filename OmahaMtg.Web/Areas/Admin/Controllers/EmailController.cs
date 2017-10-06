@@ -14,7 +14,7 @@ using OmahaMtg.Events;
 using OmahaMtg.Groups;
 using OmahaMtg.Events;
 using OmahaMtg.Profile;
-
+using OmahaMtg.Users;
 using ModelBinderAttribute = System.Web.Http.ModelBinding.ModelBinderAttribute;
 
 namespace OmahaMtg.Web.Areas.Admin.Controllers
@@ -25,10 +25,14 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
         private IEventManager _pm;
         private IProfileManager _profileManager;
         private IGroupManager _gm;
+        private IUserManager _um;
+
         public EmailController()
         {
             _pm = new EventManager();
             _gm = new GroupManager();
+            _um = new UserManager();
+
             _profileManager = new ProfileManager();
         }
 
@@ -49,8 +53,8 @@ namespace OmahaMtg.Web.Areas.Admin.Controllers
             model.AvailableGroups = _pm.GetAvailableGroups();
             model.RecipientGroups = new List<int>();
 
-            
-            model.FromEmail = SiteEmail;
+            model.FromName = _um.GetUserFullname(Guid.Parse(User.Identity.GetUserId()));
+            model.FromEmail = _um.GetUserEmail(Guid.Parse(User.Identity.GetUserId()));
             model.SendAsTest = true;
             //if (eventId.HasValue)
             //{

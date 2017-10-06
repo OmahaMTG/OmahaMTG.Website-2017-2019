@@ -155,6 +155,8 @@
     <Compile Include="ApplicationUserManager.cs" />
     <Compile Include="SmsService.cs" />
     <Compile Include="Startup\Startup.Auth.cs" />
+    <Compile Include="Users\IUserManager.cs" />
+    <Compile Include="Users\UserManager.cs" />
     <Compile Include="WinnerPicker\WinnerPicker.cs" />
   </ItemGroup>
   <ItemGroup>
