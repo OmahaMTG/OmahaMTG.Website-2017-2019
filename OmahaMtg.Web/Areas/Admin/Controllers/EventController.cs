@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using OmahaMtg.Events;
-using OmahaMtg.Events;
 using OmahaMtg.Events.Report;
 
 namespace OmahaMtg.Web.Areas.Admin.Controllers

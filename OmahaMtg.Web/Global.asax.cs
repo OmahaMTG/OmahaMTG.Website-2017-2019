@@ -19,7 +19,7 @@ namespace OmahaMtg.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            OmahaMtg.Log.Logging.Setup();
+
 
             //Make sure banner images are in the correct place.
             App_Start.BannerConfig.EnsureBannerImages();

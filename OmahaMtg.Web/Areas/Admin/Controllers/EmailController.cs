@@ -12,7 +12,6 @@ using Microsoft.AspNet.Identity;
 using OmahaMtg.Email;
 using OmahaMtg.Events;
 using OmahaMtg.Groups;
-using OmahaMtg.Events;
 using OmahaMtg.Profile;
 using OmahaMtg.Users;
 using ModelBinderAttribute = System.Web.Http.ModelBinding.ModelBinderAttribute;
