@@ -13,6 +13,16 @@
         <div>
             <div class="row">
                 <div class="col-md-6">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="fromEmail">From Name</label>
+                                <input type="text" class="form-control" value="@Model.FromName" id="fromName" name="fromName" tabindex="1">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -21,6 +31,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -29,13 +40,14 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <div class="col-md-6">
 
                     <div class="row">
                         <div class="col-md-12">
                             <ul>
-                               
+
                                 @foreach (var item in Model.AvailableGroups)
                                 {
                                     <div class="" data-role="input-control">
@@ -66,7 +78,7 @@
                     <label>Body (Markdown)</label>
                     <div class="input-control text " data-role="input-control" style="bottom: 5px; height: 100%">
                         <textarea id="body" name="body" style="max-width: none; width: 100%; height: 400px" tabindex="2" rows="50" data-provide="markdown">@Model.Body</textarea>
-                        <br/>
+                        <br />
                     </div>
                 </div>
             </div>
@@ -84,7 +96,7 @@
                     <span id="sendResult" style="display: none; color: red">
                         Sent 100 messages
                     </span>
-                    <input type="submit" value="Send Emails" class="btn btn-primary pull-right"/>
+                    <input type="submit" value="Send Emails" class="btn btn-primary pull-right" />
                 </div>
 
             </div>
@@ -96,7 +108,7 @@
 
 @section scripts
 {
-@Scripts.Render("~/bundles/marked")
+    @Scripts.Render("~/bundles/marked")
 
 
 
@@ -113,68 +125,69 @@
             });
         }
 
-        $(document).ready(function() {
-            $("#emailForm").submit(function() {
-                    event.preventDefault();
-                    var url = "/Admin/Email/SendEmail";
+        $(document).ready(function () {
+            $("#emailForm").submit(function () {
+                event.preventDefault();
+                var url = "/Admin/Email/SendEmail";
 
-                    var recipientGroups = [];
+                var recipientGroups = [];
 
-                    $('#recipientGroups:checked').each(function () {
-                        recipientGroups.push($(this).val());
-                    });
+                $('#recipientGroups:checked').each(function () {
+                    recipientGroups.push($(this).val());
+                });
 
-                    var emailData = {
-                        subject: $("#subject").val(),
-                        body: $("#body").val(),
-                        fromEmail: $("#fromEmail").val(),
-                        sendAsTest: $("#SendAsTest").prop('checked'),
-                        recipientGroups: recipientGroups
-                    };
+                var emailData = {
+                    subject: $("#subject").val(),
+                    body: $("#body").val(),
+                    fromEmail: $("#fromEmail").val(),
+                    fromName: $("#fromName").val(),
+                    sendAsTest: $("#SendAsTest").prop('checked'),
+                    recipientGroups: recipientGroups
+                };
 
-                    if (isEmpty(emailData.subject)) {
-                        displayMessge("Missing Subject");
-                        return;
-                    }
-
-                    if (isEmpty(emailData.fromEmail)) {
-                        displayMessge("Missing From Email");
-                        return;
-                    }
-
-                    if (isEmpty(emailData.fromEmail)) {
-                        displayMessge("Message Body is empty");
-                        return;
-                    }
-
-                    if (isEmpty(emailData.recipientGroups)) {
-                        displayMessge("Please Select a group to Email");
-                        return;
-                    }
-
-
-                    $.ajax({
-                        url: url,
-                        async: true,
-                        dataType: "json",
-                        type: "POST",
-                        data: JSON.stringify(emailData),
-                        contentType: 'application/json; charset=utf-8',
-                        success: function (data) {
-                            console.log(data);
-                            displayMessge("Sent " + data + "Emails");
-                        },
-                        error: function (data) {
-                            displayMessge(data);
-                        },
-                        statusCode: {
-                            400: function () {
-                                displayMessge("Error Sending Emails");
-                            }
-                        }
-                    });
-
+                if (isEmpty(emailData.subject)) {
+                    displayMessge("Missing Subject");
+                    return;
                 }
+
+                if (isEmpty(emailData.fromEmail)) {
+                    displayMessge("Missing From Email");
+                    return;
+                }
+
+                if (isEmpty(emailData.fromEmail)) {
+                    displayMessge("Message Body is empty");
+                    return;
+                }
+
+                if (isEmpty(emailData.recipientGroups)) {
+                    displayMessge("Please Select a group to Email");
+                    return;
+                }
+
+
+                $.ajax({
+                    url: url,
+                    async: true,
+                    dataType: "json",
+                    type: "POST",
+                    data: JSON.stringify(emailData),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        console.log(data);
+                        displayMessge("Sent " + data + "Emails");
+                    },
+                    error: function (data) {
+                        displayMessge(data);
+                    },
+                    statusCode: {
+                        400: function () {
+                            displayMessge("Error Sending Emails");
+                        }
+                    }
+                });
+
+            }
             );
 
 
