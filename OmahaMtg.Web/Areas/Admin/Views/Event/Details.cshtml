@@ -13,16 +13,16 @@
 
 
 
-        $("#eventStartTime").AnyTime_picker({ format: "%m/%d/%Y %l:%i:%s %p" });
-        $("#eventEndTime").AnyTime_picker({ format: "%m/%d/%Y %l:%i:%s %p" });
-        $("#publishEndTime").AnyTime_picker({ format: "%m/%d/%Y %l:%i:%s %p" });
-        $("#publishStartTime").AnyTime_picker({ format: "%m/%d/%Y %l:%i:%s %p" });
+        $("#eventStartTime").AnyTime_picker({ format: "%m/%d/%Y %l:%i %p" });
+        $("#eventEndTime").AnyTime_picker({ format: "%m/%d/%Y %l:%i %p" });
+        $("#publishEndTime").AnyTime_picker({ format: "%m/%d/%Y %l:%i %p" });
+        $("#publishStartTime").AnyTime_picker({ format: "%m/%d/%Y %l:%i %p" });
 
         $("button[data-clear]").bind("click", function () {
             var id = $(this).data("clear");
             $("#" + id).val('');
         });
-    </script>
+    </script> 
 }
 <form method="POST">
 <fieldset>
