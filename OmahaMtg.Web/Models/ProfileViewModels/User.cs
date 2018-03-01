@@ -17,6 +17,7 @@ namespace OmahaMtg.Web.Models.ProfileViewModels
         public string TwitterUser { get; set; }
         public string GitHubUser { get; set; }
         public string EmailAddress { get; set; }
+        
 
         public Dictionary<int, string> AvailableGroups { get; set; }
         public IEnumerable<int> UsersGroups { get; set; } 

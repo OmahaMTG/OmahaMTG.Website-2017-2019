@@ -27,7 +27,8 @@ namespace OmahaMtg.Data
         public string WebsiteUrl { get; set; }
         public string TwitterUser { get; set; }
         public string GitHubUser { get; set; }
-
+        public DateTime? LastLogin { get; set; }
+        public DateTime CreateDate { get; set; }
         public virtual IList<Group> Groups { get; set; }
         public virtual IList<Rsvp> Rsvps { get; set; }
     }

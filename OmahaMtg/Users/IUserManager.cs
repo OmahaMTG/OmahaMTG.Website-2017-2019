@@ -6,5 +6,7 @@ namespace OmahaMtg.Users
     {
         string GetUserEmail(Guid userId);
         string GetUserFullname(Guid userId);
+        void UpdateLastSignInTime(string email);
+        int CleanupUsers();
     }
 }

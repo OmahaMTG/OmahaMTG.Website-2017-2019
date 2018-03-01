@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using OmahaMtg.Data;
 using OmahaMtg.Profile;
+using OmahaMtg.Users;
 using OmahaMtg.Web.Models;
 
 namespace OmahaMtg.Web.Controllers
@@ -19,7 +20,8 @@ namespace OmahaMtg.Web.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private ApplicationUserManager _userManager;
+        private ApplicationUserManager _appUserManager;
+        private IUserManager _userManager;
 
         public AccountController()
         {
@@ -28,23 +30,25 @@ namespace OmahaMtg.Web.Controllers
             //    AllowOnlyAlphanumericUserNames = false,
             //    RequireUniqueEmail = true
             //};
+            _userManager = new UserManager();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager appUserManager, ApplicationSignInManager signInManager )
         {
-            UserManager = userManager;
+            UserManager = appUserManager;
             SignInManager = signInManager;
+            _userManager = new UserManager();
         }
 
         public ApplicationUserManager UserManager
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _appUserManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
             private set
             {
-                _userManager = value;
+                _appUserManager = value;
             }
         }
 
@@ -90,6 +94,7 @@ namespace OmahaMtg.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    _userManager.UpdateLastSignInTime(model.Email);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

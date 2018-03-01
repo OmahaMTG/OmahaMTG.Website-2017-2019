@@ -130,6 +130,10 @@
     <Compile Include="Migrations\201512080135255_AddBannerAdd.Designer.cs">
       <DependentUpon>201512080135255_AddBannerAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803011527432_AddLastLoginAndCreateDate.cs" />
+    <Compile Include="Migrations\201803011527432_AddLastLoginAndCreateDate.Designer.cs">
+      <DependentUpon>201803011527432_AddLastLoginAndCreateDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PagedSet.cs" />
     <Compile Include="Events\EventInfo.cs" />
@@ -162,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512080135255_AddBannerAdd.resx">
       <DependentUpon>201512080135255_AddBannerAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803011527432_AddLastLoginAndCreateDate.resx">
+      <DependentUpon>201803011527432_AddLastLoginAndCreateDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
