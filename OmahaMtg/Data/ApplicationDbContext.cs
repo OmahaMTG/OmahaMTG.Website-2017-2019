@@ -28,7 +28,6 @@ namespace OmahaMtg.Data
 
             modelBuilder.Entity<Event>().ToTable("Events");
 
-
             base.OnModelCreating(modelBuilder);
         }
 

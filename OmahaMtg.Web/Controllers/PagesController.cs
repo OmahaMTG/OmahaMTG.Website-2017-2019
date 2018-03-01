@@ -25,5 +25,10 @@ namespace OmahaMtg.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult CodeOfConduct()
+        {
+            return View();
+        }
     }
 }
