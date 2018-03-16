@@ -178,7 +178,7 @@ namespace OmahaMtg.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Id = System.Guid.NewGuid()};
+                var user = new User { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Id = System.Guid.NewGuid(), CreateDate = DateTime.Now};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 var profileManager = new ProfileManager();
                 profileManager.UpdateGroupMembership(user.Id, model.UsersGroups.ToList());
