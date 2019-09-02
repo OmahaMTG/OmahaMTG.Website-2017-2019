@@ -1,42 +1,32 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.152
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmahaMtg.Web", "OmahaMtg.Web\OmahaMtg.Web.csproj", "{E0603027-B2D2-428E-84EC-6B9592B3EEB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmahaMTG.Api", "src\OmahaMTG.Api\OmahaMTG.Api.csproj", "{B83A2956-BC2C-40CE-9C4E-6B1D7FA142AC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{ACF10A69-32FE-477C-94C2-07F864980FB8}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmahaMTG", "src\OmahaMTG\OmahaMTG.csproj", "{AEB5DF81-946C-4CEA-8DCA-768A9C06198E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmahaMtg", "OmahaMtg\OmahaMtg.csproj", "{62B460FD-E9D9-4650-99AC-8ABB75FED0BA}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{F0034807-5AA8-484F-A2F9-1331544B9B85}"
-	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
-		README.md = README.md
-		Readme.txt = Readme.txt
-	EndProjectSection
-EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E0603027-B2D2-428E-84EC-6B9592B3EEB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0603027-B2D2-428E-84EC-6B9592B3EEB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E0603027-B2D2-428E-84EC-6B9592B3EEB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E0603027-B2D2-428E-84EC-6B9592B3EEB8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{62B460FD-E9D9-4650-99AC-8ABB75FED0BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{62B460FD-E9D9-4650-99AC-8ABB75FED0BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{62B460FD-E9D9-4650-99AC-8ABB75FED0BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{62B460FD-E9D9-4650-99AC-8ABB75FED0BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B83A2956-BC2C-40CE-9C4E-6B1D7FA142AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B83A2956-BC2C-40CE-9C4E-6B1D7FA142AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B83A2956-BC2C-40CE-9C4E-6B1D7FA142AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B83A2956-BC2C-40CE-9C4E-6B1D7FA142AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEB5DF81-946C-4CEA-8DCA-768A9C06198E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEB5DF81-946C-4CEA-8DCA-768A9C06198E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEB5DF81-946C-4CEA-8DCA-768A9C06198E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEB5DF81-946C-4CEA-8DCA-768A9C06198E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5077A468-A00D-4097-8276-EA0F63687E76}
 	EndGlobalSection
 EndGlobal
